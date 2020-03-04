@@ -1,6 +1,6 @@
-package com.example.ats.users.model;
+package com.example.ats.model;
 
-import com.example.ats.users.repository.UserRepository;
+import com.example.ats.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

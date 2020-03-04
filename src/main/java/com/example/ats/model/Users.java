@@ -1,4 +1,4 @@
-package com.example.ats.users.model;
+package com.example.ats.model;
 
 import javax.persistence.*;
 
@@ -21,6 +21,12 @@ public class Users {
     private String phoneno;
     private boolean accountisactive;
     private String registerdate;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Recruiter recruiter;
+
+
 
     public Users(){}
 
@@ -94,5 +100,21 @@ public class Users {
 
     public void setRegisterdate(String registerdate) {
         this.registerdate = registerdate;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Recruiter getRecruiter() {
+        return recruiter;
+    }
+
+    public void setRecruiter(Recruiter recruiter) {
+        this.recruiter = recruiter;
     }
 }

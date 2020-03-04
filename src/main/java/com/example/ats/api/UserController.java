@@ -1,7 +1,7 @@
-package com.example.ats.users.api;
+package com.example.ats.api;
 
-import com.example.ats.users.model.Users;
-import com.example.ats.users.repository.UserRepository;
+import com.example.ats.model.Users;
+import com.example.ats.repository.UserRepository;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,6 +22,7 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
 
     @RequestMapping("/homes")
     public String homes(){
@@ -65,7 +66,6 @@ public class UserController {
         users.setEmail(usersDetails.getEmail());
         users.setPassword(usersDetails.getPassword());
         users.setPhoneno(usersDetails.getPhoneno());
-        users.setUsertype(usersDetails.getUsertype());
         Users updatedUsers = userRepository.save(users);
         return updatedUsers;
     }

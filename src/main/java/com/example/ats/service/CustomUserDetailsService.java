@@ -1,8 +1,8 @@
-package com.example.ats.users.service;
+package com.example.ats.service;
 
-import com.example.ats.users.model.CustomUserDetails;
-import com.example.ats.users.model.Users;
-import com.example.ats.users.repository.UserRepository;
+import com.example.ats.model.CustomUserDetails;
+import com.example.ats.model.Users;
+import com.example.ats.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

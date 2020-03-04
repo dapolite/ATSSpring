@@ -1,6 +1,6 @@
-package com.example.ats.users.repository;
+package com.example.ats.repository;
 
-import com.example.ats.users.model.Users;
+import com.example.ats.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
