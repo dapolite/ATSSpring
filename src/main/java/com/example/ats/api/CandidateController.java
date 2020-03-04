@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ats.model.RecruiterUser;
-import com.example.ats.repository.RecruiterUserRepository;
+import com.example.ats.model.CandidateUser;
+import com.example.ats.repository.CandidateUserRepository;
 
 @RestController
-@RequestMapping("/api/recruiters")
-public class RecruiterController {
+@RequestMapping("/api/candidates")
+public class CandidateController {
 
     @Autowired
-    private RecruiterUserRepository recruiterRepository;
+    private CandidateUserRepository candidateRepository;
 
     @RequestMapping("/homerec")
     public String home(){
@@ -25,14 +25,14 @@ public class RecruiterController {
     }
 
     @GetMapping
-    public List<RecruiterUser> getAllRecruiters(){
-        return recruiterRepository.findAll();
+    public List<CandidateUser> getAllCandidates(){
+        return candidateRepository.findAll();
     }
 
 
     @GetMapping("/{recid}")
-    public void getRecruiterById(@PathVariable(value = "id") Long recId) {
-        recruiterRepository.findById(recId)
+    public void getCandidateById(@PathVariable(value = "id") Long recId) {
+    	candidateRepository.findById(recId)
                 .orElseThrow(() -> new ResourceNotFoundException("Note", "id", recId));
     }
 
