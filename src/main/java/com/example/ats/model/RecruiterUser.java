@@ -1,6 +1,9 @@
 package com.example.ats.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 
 @Entity
@@ -11,19 +14,19 @@ public class RecruiterUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
 
-    private Long userTypeId;
     private String usertype;
     private String userName;
     private String password;
     private String email;
     private String phoneno;
     private boolean accountisactive;
-    private String registerdate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private Timestamp registerdate;
 
     @OneToOne
     @PrimaryKeyJoinColumn
     private Recruiter recruiter;
-
 
 
     public RecruiterUser(){}
@@ -36,12 +39,12 @@ public class RecruiterUser {
         this.userId = userId;
     }
 
-    public Long getUserTypeId() {
-        return userTypeId;
+    public Timestamp getRegisterdate() {
+        return registerdate;
     }
 
-    public void setUserTypeId(Long userTypeId) {
-        this.userTypeId = userTypeId;
+    public void setRegisterdate(Timestamp registerdate) {
+        this.registerdate = registerdate;
     }
 
     public String getUsertype() {
@@ -92,13 +95,6 @@ public class RecruiterUser {
         this.accountisactive = accountisactive;
     }
 
-    public String getRegisterdate() {
-        return registerdate;
-    }
-
-    public void setRegisterdate(String registerdate) {
-        this.registerdate = registerdate;
-    }
 
     public String getUserName() {
         return userName;

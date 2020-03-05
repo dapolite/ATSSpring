@@ -8,6 +8,7 @@ import java.util.Date;
 
 
 @Entity
+@Table(name="recruiter_details")
 public class Recruiter {
 
     @Id
@@ -18,14 +19,16 @@ public class Recruiter {
     private String companyaddress;
     private String companywebsite;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-YYYY")
     private Date companyestdate;
     private String companylogo;
 
     @OneToOne
     @JoinColumn
     @MapsId
-    private Users users;
+    private RecruiterUser user;
+
+    public Recruiter(){}
 
     public Long getRecruiterId() {
         return recruiterId;
@@ -91,12 +94,12 @@ public class Recruiter {
         this.companylogo = companylogo;
     }
 
-    public Users getUsers() {
-        return users;
+    public RecruiterUser getUser() {
+        return user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUser(RecruiterUser user) {
+        this.user = user;
     }
 }
 

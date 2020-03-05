@@ -1,6 +1,9 @@
 package com.example.ats.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 
 @Entity
@@ -13,22 +16,25 @@ public class CandidateUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
 
-    private Long userTypeId;
     private String usertype;
     private String userName;
     private String password;
     private String email;
     private String phoneno;
     private boolean accountisactive;
-    private String registerdate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private Timestamp registerdate;
 
     @OneToOne
     @PrimaryKeyJoinColumn
-    private Recruiter recruiter;
+    private Candidate candidate;
 
 
 
     public CandidateUser(){}
+
+
 
     public long getUserId() {
         return userId;
@@ -36,14 +42,6 @@ public class CandidateUser {
 
     public void setUserId(long userId) {
         this.userId = userId;
-    }
-
-    public Long getUserTypeId() {
-        return userTypeId;
-    }
-
-    public void setUserTypeId(Long userTypeId) {
-        this.userTypeId = userTypeId;
     }
 
     public String getUsertype() {
@@ -94,11 +92,11 @@ public class CandidateUser {
         this.accountisactive = accountisactive;
     }
 
-    public String getRegisterdate() {
+    public Timestamp getRegisterdate() {
         return registerdate;
     }
 
-    public void setRegisterdate(String registerdate) {
+    public void setRegisterdate(Timestamp registerdate) {
         this.registerdate = registerdate;
     }
 
@@ -110,11 +108,13 @@ public class CandidateUser {
         this.userName = userName;
     }
 
-    public Recruiter getRecruiter() {
-        return recruiter;
+    public Candidate getCandidate() {
+        return candidate;
     }
 
-    public void setRecruiter(Recruiter recruiter) {
-        this.recruiter = recruiter;
+    public void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
     }
+
+
 }
