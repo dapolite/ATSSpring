@@ -1,3 +1,4 @@
+/*
 package com.example.ats.service;
 
 import com.example.ats.model.CustomUserDetails;
@@ -24,3 +25,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         return users.map(CustomUserDetails::new).get();
     }
 }
+*/

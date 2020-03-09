@@ -1,13 +1,12 @@
 package com.example.ats.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
+//@Entity
 public class JobPost {
 
-        @Id
+        //@Id
         private Long jobpostid;
 
         private Timestamp jpbpost_createdate;
@@ -15,8 +14,14 @@ public class JobPost {
         private boolean jobpost_isactive;
         private int jobpost_duration;
 
+
+
+        //@ManyToOne(fetch = FetchType.LAZY, optional = false)
+        //@JoinColumn
         private Recruiter recruiter;
 
+        private JobType jobType;
+        private JobLocation jobLocation;
 
 
 }

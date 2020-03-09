@@ -3,10 +3,10 @@ package com.example.ats.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+//@Entity
 public class JobLocation {
 
-    @Id
+    //@Id
     private Long joblocation_Id;
     private String joblocation_address;
     private String joblocation_city;

@@ -24,8 +24,8 @@ public class RecruiterUser {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Timestamp registerdate;
 
-    @OneToOne
     @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
     private Recruiter recruiter;
 
 

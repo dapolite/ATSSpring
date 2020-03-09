@@ -1,11 +1,12 @@
 package com.example.ats.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+//@Entity
 public class Experience {
 
+    //@Id
     private Long experience_Id;
 
     private String expcurrent_job;
@@ -18,7 +19,11 @@ public class Experience {
     private String expjob_country;
     private String expjob_desc;
 
+    //@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    //@JoinColumn
+    private Candidate candidate;
 
 
-
+    public Experience() {
+    }
 }

@@ -1,17 +1,23 @@
 package com.example.ats.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+//@Entity
 public class Education {
 
+    @Id
+    private Long education_id;
     private String degree_name;
     private String institutie_name;
     private String subject;
     private Date edustart_date;
     private Date educomplete_date;
     private int edu_percentage;
+
+    //@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    //@JoinColumn
+    private Candidate candidate;
 
 
 }

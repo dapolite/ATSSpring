@@ -1,21 +1,27 @@
 package com.example.ats.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 
 @Entity
 @Table(name="candidate_user")
-public class CandidateUser {
+public class CandidateUser implements Serializable {
 
 
 
     @Id
+    @NotNull
+    @Column(unique=true, nullable=false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
 
+    Date date;
     private String usertype;
     private String userName;
     private String password;
@@ -24,11 +30,10 @@ public class CandidateUser {
     private boolean accountisactive;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    private Timestamp registerdate;
+    private Date registerdate;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Candidate candidate;
+/*    @OneToOne(cascade=CascadeType.PERSIST, mappedBy = "user")
+    private Candidate candidate;*/
 
 
 
@@ -92,29 +97,24 @@ public class CandidateUser {
         this.accountisactive = accountisactive;
     }
 
-    public Timestamp getRegisterdate() {
+    public Date getRegisterdate() {
         return registerdate;
     }
 
-    public void setRegisterdate(Timestamp registerdate) {
+    public void setRegisterdate(Date registerdate) {
         this.registerdate = registerdate;
     }
 
-    public String getUserName() {
-        return userName;
-    }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
-    public Candidate getCandidate() {
+/*    public Candidate getCandidate() {
         return candidate;
     }
 
     public void setCandidate(Candidate candidate) {
         this.candidate = candidate;
-    }
+        this.setUserId(userId);
+    }*/
 
 
 }

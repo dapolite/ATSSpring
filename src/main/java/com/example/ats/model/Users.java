@@ -1,9 +1,10 @@
+/*
 package com.example.ats.model;
 
 import javax.persistence.*;
 
 
-@Entity
+//@Entity
 @Table(name="ATSUser")
 public class Users {
 
@@ -118,3 +119,4 @@ public class Users {
         this.recruiter = recruiter;
     }
 }
+*/

@@ -53,7 +53,7 @@ class CandidateSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http       //other configure params.
                 .csrf().disable();
-        http.requestMatchers().antMatchers("/api/candidates/**")
+        http.requestMatchers().antMatchers("/api/candidat")
         .and()
         .authorizeRequests()
         .anyRequest().authenticated()

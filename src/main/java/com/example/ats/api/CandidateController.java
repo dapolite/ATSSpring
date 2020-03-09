@@ -1,6 +1,7 @@
 package com.example.ats.api;
 
 import com.example.ats.model.Candidate;
+import com.example.ats.model.CandidateUser;
 import com.example.ats.repository.CandidateRepository;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class CandidateController {
         return "Hello9";
     }
 
-    @GetMapping("/candidatelist")
+    @GetMapping("/candidateslist")
     public List<Candidate> getAllCandidates(){
         return candidateRepository.findAll();
     }
