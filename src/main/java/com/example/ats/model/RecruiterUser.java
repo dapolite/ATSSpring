@@ -1,6 +1,7 @@
 package com.example.ats.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -11,8 +12,10 @@ import java.sql.Timestamp;
 public class RecruiterUser {
 
     @Id
+    @NotNull
+    @Column(name = "ID", updatable = false, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long userId;
+    private long Id;
 
     private String usertype;
     private String userName;
@@ -32,11 +35,11 @@ public class RecruiterUser {
     public RecruiterUser(){}
 
     public long getUserId() {
-        return userId;
+        return Id;
     }
 
     public void setUserId(long userId) {
-        this.userId = userId;
+        this.Id = userId;
     }
 
     public Timestamp getRegisterdate() {

@@ -17,9 +17,9 @@ public class CandidateUser implements Serializable {
 
     @Id
     @NotNull
-    @Column(unique=true, nullable=false)
+    @Column(name = "ID", updatable = false, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long userId;
+    private long Id;
 
     Date date;
     private String usertype;
@@ -42,11 +42,12 @@ public class CandidateUser implements Serializable {
 
 
     public long getUserId() {
-        return userId;
+        return Id;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public CandidateUser setUserId(long userId) {
+        this.Id = userId;
+        return  this;
     }
 
     public String getUsertype() {

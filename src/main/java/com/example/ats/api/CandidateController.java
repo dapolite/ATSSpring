@@ -3,6 +3,7 @@ package com.example.ats.api;
 import com.example.ats.model.Candidate;
 import com.example.ats.model.CandidateUser;
 import com.example.ats.repository.CandidateRepository;
+import com.example.ats.repository.CandidateUserRepository;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,9 @@ public class CandidateController {
 
     @Autowired
     private CandidateRepository candidateRepository;
+
+    @Autowired
+    private CandidateUserRepository candidateUserRepository;
 
     @RequestMapping("/homecan")
     public String home(){
@@ -52,6 +56,8 @@ public class CandidateController {
 
     @PostMapping("/candidatedetails")
     public void createCandidate(@Valid @RequestBody Candidate candidate) {
+        CandidateUser user=new CandidateUser();
+        candidateUserRepository.save(user);
         candidateRepository.save(candidate);
     }
 
