@@ -1,4 +1,4 @@
-package com.example.ats.model;
+/*package com.example.ats.model;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -27,3 +27,4 @@ public class Experience {
     public Experience() {
     }
 }
+*/

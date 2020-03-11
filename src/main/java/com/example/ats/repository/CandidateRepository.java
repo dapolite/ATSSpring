@@ -1,4 +1,4 @@
-package com.example.ats.repository;
+/*package com.example.ats.repository;
 
 import com.example.ats.model.Candidate;
 import org.springframework.data.domain.Page;
@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CandidateRepository extends JpaRepository<Candidate,Long> {
 
-    /*Page<Candidate> findByName(String cname, Pageable pageable);*/
+    Page<Candidate> findByName(String cname, Pageable pageable);
 
 }
+
+*/

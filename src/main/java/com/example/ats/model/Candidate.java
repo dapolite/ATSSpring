@@ -1,4 +1,4 @@
-package com.example.ats.model;
+/*package com.example.ats.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -8,12 +8,19 @@ import java.util.Set;
 
 @Entity
 @Table(name="candidate_details")
-public class Candidate implements Serializable {
+@PrimaryKeyJoinColumn(name="candidate_id")
+public class Candidate extends CandidateUser   {
 
-    @Id
-    @Column(unique=true, nullable=false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long candidateId;
+    public Candidate(String candidate_fname, String candidate_lname, String candidate_address, String candidate_about, String candidate_profpic, String candidateloc_city, String candidateloc_state, String candidateloc_country) {
+        this.candidate_fname = candidate_fname;
+        this.candidate_lname = candidate_lname;
+        this.candidate_address = candidate_address;
+        this.candidate_about = candidate_about;
+        this.candidate_profpic = candidate_profpic;
+        this.candidateloc_city = candidateloc_city;
+        this.candidateloc_state = candidateloc_state;
+        this.candidateloc_country = candidateloc_country;
+    }
 
     private String candidate_fname;
     private String candidate_lname;
@@ -24,19 +31,8 @@ public class Candidate implements Serializable {
     private String candidateloc_state;
     private String candidateloc_country;
 
-    @MapsId
-    @OneToOne
-    @JoinColumn(name="candidate_id", referencedColumnName="user_id")
-    private CandidateUser user;
 
-    public CandidateUser getUser() {
-        return user;
-    }
 
-    public void setUser(CandidateUser user) {
-        this.user = user;
-        this.candidateId=user.getUserId();
-    }
 //private Industry industry;
 
     //@OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -49,13 +45,6 @@ public class Candidate implements Serializable {
 
     public Candidate(){}
 
-    public Long getCandidateId() {
-        return candidateId;
-    }
-
-    public void setCandidateId(long candidateId) {
-        this.candidateId = candidateId;
-    }
 
     public String getCandidate_fname() {
         return candidate_fname;
@@ -121,3 +110,4 @@ public class Candidate implements Serializable {
         this.candidate_profpic = candidate_profpic;
     }
 }
+*/

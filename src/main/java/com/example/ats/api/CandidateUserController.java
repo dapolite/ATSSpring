@@ -1,8 +1,8 @@
 package com.example.ats.api;
 
-import com.example.ats.model.Candidate;
+//import com.example.ats.model.Candidate;
 import com.example.ats.model.CandidateUser;
-import com.example.ats.repository.CandidateRepository;
+//import com.example.ats.repository.CandidateRepository;
 import com.example.ats.repository.CandidateUserRepository;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,7 @@ public class CandidateUserController {
 
     @PutMapping("/candidate/{id}")
     public void updateCandidate(
-            @PathVariable(value = "id") Long userId, @Valid @RequestBody Candidate candidaterdet)
+            @PathVariable(value = "id") Long userId, @Valid @RequestBody CandidateUser candidaterdet)
             throws ResourceNotFoundException {
         CandidateUser candidate =
                 candidateRepository

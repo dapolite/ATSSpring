@@ -11,5 +11,5 @@ public class Skill {
 
     //@ManyToOne(fetch = FetchType.LAZY, optional = false)
     //@JoinColumn
-    private Candidate candidate;
+    private CandidateUser candidateUser;
 }

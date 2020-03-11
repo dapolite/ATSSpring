@@ -1,4 +1,4 @@
-package com.example.ats.api;
+/*package com.example.ats.api;
 
 import com.example.ats.model.Candidate;
 import com.example.ats.model.CandidateUser;
@@ -47,7 +47,7 @@ public class CandidateController {
         }
     }*/
 
-
+/*
     @GetMapping("/candidatedetails/{canid}")
     public void getCandidateById(@PathVariable(value = "id") Long canId) {
         candidateRepository.findById(canId)
@@ -86,3 +86,4 @@ public class CandidateController {
     }
 
 }
+*/
