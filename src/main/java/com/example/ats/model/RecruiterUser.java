@@ -17,12 +17,17 @@ public class RecruiterUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long Id;
 
-    private String usertype;
     private String userName;
     private String password;
     private String email;
     private String phoneno;
     private boolean accountisactive;
+
+    private Long industryid;
+    private String companyname;
+    private String companydesc;
+    private String companyaddress;
+    private String companywebsite;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Timestamp registerdate;
@@ -50,13 +55,6 @@ public class RecruiterUser {
         this.registerdate = registerdate;
     }
 
-    public String getUsertype() {
-        return usertype;
-    }
-
-    public void setUsertype(String usertype) {
-        this.usertype = usertype;
-    }
 
     public String getUsername() {
         return userName;

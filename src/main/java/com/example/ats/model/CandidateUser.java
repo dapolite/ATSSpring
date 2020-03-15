@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -14,12 +16,10 @@ import java.util.Date;
 //@MappedSuperclass
 public class CandidateUser implements Serializable {
 
-
-
     @Id
     @NotNull
     @Column(name = "ID", updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long Id;
 
     Date date;
@@ -41,8 +41,8 @@ public class CandidateUser implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Date registerdate;
 
-/*    @OneToOne(cascade=CascadeType.PERSIST, mappedBy = "user")
-    private Candidate candidate;*/
+    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
+    private Set<Skill> skills;
 
 
     public CandidateUser(long id, Date date, String usertype, String userName, String password, String email, String phoneno, boolean accountisactive, String candidate_fname, String candidate_lname, String candidate_address, String candidate_about, String candidate_profpic, String candidateloc_city, String candidateloc_state, String candidateloc_country, Date registerdate) {
@@ -66,17 +66,6 @@ public class CandidateUser implements Serializable {
     }
 
     public CandidateUser(){}
-
-    /*public CandidateUser(long id, String usertype, String userName, String password, String email, String phoneno, boolean accountisactive, Date registerdate) {
-        Id = id;
-        this.usertype = usertype;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.phoneno = phoneno;
-        this.accountisactive = accountisactive;
-        this.registerdate = registerdate;
-    }*/
 
     public long getUserId() {
         return Id;
@@ -140,22 +129,6 @@ public class CandidateUser implements Serializable {
 
     public void setRegisterdate(Date registerdate) {
         this.registerdate = registerdate;
-    }
-
-    /*public long getId() {
-        return Id;
-    }
-
-    public void setId(long id) {
-        Id = id;
-    }*/
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getCandidate_fname() {
@@ -222,14 +195,11 @@ public class CandidateUser implements Serializable {
         this.candidateloc_country = candidateloc_country;
     }
 
-    /*    public Candidate getCandidate() {
-        return candidate;
+    public Set<Skill> getSkills() {
+        return skills;
     }
 
-    public void setCandidate(Candidate candidate) {
-        this.candidate = candidate;
-        this.setUserId(userId);
-    }*/
-
-
+    public void setSkills(Set<Skill> skills) {
+        this.skills = skills;
+    }
 }

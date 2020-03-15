@@ -20,6 +20,11 @@ public class CandidateUserController {
     @Autowired
     private CandidateUserRepository candidateRepository;
 
+    @RequestMapping("/homecan")
+    public String home(){
+        return "Hello9";
+    }
+
     @GetMapping("/candidatelist")
     public List<CandidateUser> getAllCandidates(){
         return candidateRepository.findAll();
