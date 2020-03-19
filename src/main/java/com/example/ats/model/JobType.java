@@ -1,15 +1,50 @@
 package com.example.ats.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-//@Entity
-public class JobType {
+import javax.persistence.*;
+import java.io.Serializable;
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long jobtype_id;
-    private String jobtype_name;
+@Entity
+public class JobType implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long jobtypeid;
+
+    private String jobtypename;
+
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @JsonIgnore
+    private JobPost jobPost;
+
+    public JobType(Long jobtypeid, String jobtypename, JobPost jobPost) {
+        this.jobtypeid = jobtypeid;
+        this.jobtypename = jobtypename;
+        this.jobPost = jobPost;
+    }
+
+    public Long getJobtypeid() {
+        return jobtypeid;
+    }
+
+    public void setJobtypeid(Long jobtypeid) {
+        this.jobtypeid = jobtypeid;
+    }
+
+    public String getJobtypename() {
+        return jobtypename;
+    }
+
+    public void setJobtypename(String jobtypename) {
+        this.jobtypename = jobtypename;
+    }
+
+    public JobPost getJobPost() {
+        return jobPost;
+    }
+
+    public void setJobPost(JobPost jobPost) {
+        this.jobPost = jobPost;
+    }
 }

@@ -20,7 +20,7 @@ public class RecruiterUserDetails implements UserDetails {
     private List<GrantedAuthority> authorities;
 
     public RecruiterUserDetails(RecruiterUser users) {
-        this.userName=users.getUsername();
+        this.userName=users.getUserName();
         this.password=users.getPassword();
         this.accountisactive=users.isAccountisactive();
 //        this.authorities=Arrays.stream(users.getUsertype().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());

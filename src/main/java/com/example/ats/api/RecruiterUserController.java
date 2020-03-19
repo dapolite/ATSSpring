@@ -31,9 +31,9 @@ public class RecruiterUserController {
 
 
     @GetMapping("/{recid}")
-    public void getRecruiterById(@PathVariable(value = "id") Long recId) {
-        recruiterRepository.findById(recId)
-                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", recId));
+    public RecruiterUser getRecruiterById(@PathVariable(value = "recid") Long recid) {
+        return recruiterRepository.findById(recid)
+                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", recid));
     }
 
     @PostMapping("/recruiter")
@@ -43,12 +43,12 @@ public class RecruiterUserController {
 
     @PutMapping("/recruiter/{id}")
     public void updateRecruiter(
-            @PathVariable(value = "id") Long userId, @Valid @RequestBody RecruiterUser recruiteruser)
+            @PathVariable(value = "id") Long id, @Valid @RequestBody RecruiterUser recruiteruser)
             throws ResourceNotFoundException {
         RecruiterUser recruiter =
                 recruiterRepository
-                        .findById(userId)
-                        .orElseThrow(() -> new ResourceNotFoundException("Users not found on :: " + userId));
+                        .findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Users not found on :: " +id));
         recruiter.setEmail(recruiter.getEmail());
         recruiter.setPassword(recruiter.getPassword());
         recruiter.setPhoneno(recruiter.getPhoneno());

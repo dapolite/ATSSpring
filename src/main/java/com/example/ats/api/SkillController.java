@@ -23,14 +23,11 @@ public class SkillController{
     @PostMapping("/{candidateId}/skill")
     public void createSkill(@PathVariable (value = "candidateId") @Valid @RequestBody Long candidateId, Skill skill) throws Exception {
 
-        if(skill.getSkillName() == null){
-            throw new Exception("Name Not Found");
-        }
 
-//        candidateUserRepository.findById(candidateId).map(user -> {
-//            skill.setCandidateUser(user);
-//            return skillRepo.save(skill);
-//        });
+        candidateUserRepository.findById(candidateId).map(user -> {
+            skill.setCandidateUser(user);
+            return skillRepo.save(skill);
+       });
     }
 
 

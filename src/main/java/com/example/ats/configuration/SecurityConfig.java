@@ -28,7 +28,7 @@ class RecruiterSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         
-        http.requestMatchers().antMatchers("/api/recruiters/**")
+        http.requestMatchers().antMatchers("/api/recruit")
         .and()
         .authorizeRequests()
             .anyRequest().authenticated()

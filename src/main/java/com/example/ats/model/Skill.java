@@ -4,9 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Skill {
+public class Skill implements Serializable {
 
     @Id
     @NotNull

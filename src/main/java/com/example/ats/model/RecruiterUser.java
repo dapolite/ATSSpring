@@ -2,14 +2,19 @@ package com.example.ats.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
 @Table(name="recruiter_user")
-public class RecruiterUser {
+public class RecruiterUser implements Serializable {
 
     @Id
     @NotNull
@@ -21,46 +26,61 @@ public class RecruiterUser {
     private String password;
     private String email;
     private String phoneno;
+    private String firstname;
+    private String lastname;
     private boolean accountisactive;
 
-    private Long industryid;
     private String companyname;
     private String companydesc;
     private String companyaddress;
     private String companywebsite;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    private Timestamp registerdate;
 
-    @PrimaryKeyJoinColumn
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
-    private Recruiter recruiter;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date registerdate;
+
+    @OneToMany(mappedBy = "recruiterUser", cascade = CascadeType.PERSIST)
+    private Set<JobPost> jobpost=new HashSet<>();
+
+    @OneToMany(mappedBy = "recruiterUser", cascade = CascadeType.ALL)
+    private  Set<Industry> industry;
 
 
     public RecruiterUser(){}
 
-    public long getUserId() {
+    public RecruiterUser(long id, String userName, String password, String email, String phoneno, String firstname, String lastname, boolean accountisactive, String companyname, String companydesc, String companyaddress, String companywebsite, Date registerdate, Set<JobPost> jobpost, Set<Industry> industry) {
+        Id = id;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.phoneno = phoneno;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.accountisactive = accountisactive;
+        this.companyname = companyname;
+        this.companydesc = companydesc;
+        this.companyaddress = companyaddress;
+        this.companywebsite = companywebsite;
+        this.registerdate = registerdate;
+        this.jobpost = jobpost;
+        this.industry = industry;
+    }
+
+    public long getId() {
         return Id;
     }
 
-    public void setUserId(long userId) {
-        this.Id = userId;
+    public void setId(long id) {
+        Id = id;
     }
 
-    public Timestamp getRegisterdate() {
-        return registerdate;
-    }
-
-    public void setRegisterdate(Timestamp registerdate) {
-        this.registerdate = registerdate;
-    }
-
-
-    public String getUsername() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setUsername(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
@@ -88,6 +108,22 @@ public class RecruiterUser {
         this.phoneno = phoneno;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
     public boolean isAccountisactive() {
         return accountisactive;
     }
@@ -96,20 +132,59 @@ public class RecruiterUser {
         this.accountisactive = accountisactive;
     }
 
-
-    public String getUserName() {
-        return userName;
+    public String getCompanyname() {
+        return companyname;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setCompanyname(String companyname) {
+        this.companyname = companyname;
     }
 
-    public Recruiter getRecruiter() {
-        return recruiter;
+    public String getCompanydesc() {
+        return companydesc;
     }
 
-    public void setRecruiter(Recruiter recruiter) {
-        this.recruiter = recruiter;
+    public void setCompanydesc(String companydesc) {
+        this.companydesc = companydesc;
+    }
+
+    public String getCompanyaddress() {
+        return companyaddress;
+    }
+
+    public void setCompanyaddress(String companyaddress) {
+        this.companyaddress = companyaddress;
+    }
+
+    public String getCompanywebsite() {
+        return companywebsite;
+    }
+
+    public void setCompanywebsite(String companywebsite) {
+        this.companywebsite = companywebsite;
+    }
+
+    public Date getRegisterdate() {
+        return registerdate;
+    }
+
+    public void setRegisterdate(Date registerdate) {
+        this.registerdate = registerdate;
+    }
+
+    public Set<JobPost> getJobpost() {
+        return jobpost;
+    }
+
+    public void setJobpos(Set<JobPost> jobpost) {
+        this.jobpost = jobpost;
+    }
+
+    public Set<Industry> getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(Set<Industry> industry) {
+        this.industry = industry;
     }
 }
