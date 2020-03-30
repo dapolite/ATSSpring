@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -30,7 +29,6 @@ public class CandidateUser implements Serializable {
     private String email;
     private String phoneno;
     private boolean accountisactive;
-    private boolean isshortlisted;
     private String candidate_fname;
     private String candidate_lname;
     private String candidate_address;
@@ -46,16 +44,8 @@ public class CandidateUser implements Serializable {
     @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
     private Set<Skill> skills;
 
-    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
-    private Set<CandidateResume> candidateResume = new HashSet<>();
 
-    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
-    private Set<Education> educations = new HashSet<>();
-
-    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
-    private Set<Experience> experiences = new HashSet<>();
-
-    public CandidateUser(long id, Date date, String usertype, String userName, String password, String email, String phoneno, boolean accountisactive, boolean isshortlisted, String candidate_fname, String candidate_lname, String candidate_address, String candidate_about, String candidate_profpic, String candidateloc_city, String candidateloc_state, String candidateloc_country, Date registerdate) {
+    public CandidateUser(long id, Date date, String usertype, String userName, String password, String email, String phoneno, boolean accountisactive, String candidate_fname, String candidate_lname, String candidate_address, String candidate_about, String candidate_profpic, String candidateloc_city, String candidateloc_state, String candidateloc_country, Date registerdate) {
         Id = id;
         this.date = date;
         this.usertype = usertype;
@@ -64,7 +54,6 @@ public class CandidateUser implements Serializable {
         this.email = email;
         this.phoneno = phoneno;
         this.accountisactive = accountisactive;
-        this.isshortlisted = isshortlisted;
         this.candidate_fname = candidate_fname;
         this.candidate_lname = candidate_lname;
         this.candidate_address = candidate_address;
@@ -132,14 +121,6 @@ public class CandidateUser implements Serializable {
 
     public void setAccountisactive(boolean accountisactive) {
         this.accountisactive = accountisactive;
-    }
-
-    public boolean isIsshortlisted() {
-        return isshortlisted;
-    }
-
-    public void setIsshortlisted(boolean isshortlisted) {
-        this.isshortlisted = isshortlisted;
     }
 
     public Date getRegisterdate() {
@@ -220,29 +201,5 @@ public class CandidateUser implements Serializable {
 
     public void setSkills(Set<Skill> skills) {
         this.skills = skills;
-    }
-
-    public Set<CandidateResume> getCandidateResume() {
-        return candidateResume;
-    }
-
-    public void setCandidateResume(Set<CandidateResume> candidateResume) {
-        this.candidateResume = candidateResume;
-    }
-
-    public Set<Education> getEducations() {
-        return educations;
-    }
-
-    public void setEducations(Set<Education> educations) {
-        this.educations = educations;
-    }
-
-    public Set<Experience> getExperiences() {
-        return experiences;
-    }
-
-    public void setExperiences(Set<Experience> experiences) {
-        this.experiences = experiences;
     }
 }

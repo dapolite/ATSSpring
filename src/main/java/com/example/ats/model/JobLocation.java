@@ -8,64 +8,67 @@ import javax.persistence.*;
 public class JobLocation {
 
     @Id
-    private Long joblocation_Id;
-    private String joblocation_address;
-    private String joblocation_city;
-    private String joblocation_state;
-    private String joblocation_country;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long joblocationId;
+    private String joblocationaddress;
+    private String joblocationcity;
+    private String joblocationstate;
+    private String joblocationcountry;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "id")
     @JsonIgnore
     private JobPost jobPost;
 
-    public JobLocation(Long joblocation_Id, String joblocation_address, String joblocation_city, String joblocation_state, String joblocation_country, JobPost jobPost) {
-        this.joblocation_Id = joblocation_Id;
-        this.joblocation_address = joblocation_address;
-        this.joblocation_city = joblocation_city;
-        this.joblocation_state = joblocation_state;
-        this.joblocation_country = joblocation_country;
+    public JobLocation(){}
+
+    public JobLocation(Long joblocation_Id, String joblocationaddress, String joblocationcity, String joblocationstate, String joblocationcountry, JobPost jobPost) {
+        this.joblocationId = joblocationId;
+        this.joblocationaddress = joblocationaddress;
+        this.joblocationcity = joblocationcity;
+        this.joblocationstate = joblocationstate;
+        this.joblocationcountry = joblocationcountry;
         this.jobPost = jobPost;
     }
 
     public Long getJoblocation_Id() {
-        return joblocation_Id;
+        return joblocationId;
     }
 
-    public void setJoblocation_Id(Long joblocation_Id) {
-        this.joblocation_Id = joblocation_Id;
+    public void setJoblocation_Id(Long joblocationId) {
+        this.joblocationId = joblocationId;
     }
 
     public String getJoblocation_address() {
-        return joblocation_address;
+        return joblocationaddress;
     }
 
-    public void setJoblocation_address(String joblocation_address) {
-        this.joblocation_address = joblocation_address;
+    public void setJoblocation_address(String joblocationaddress) {
+        this.joblocationaddress = joblocationaddress;
     }
 
     public String getJoblocation_city() {
-        return joblocation_city;
+        return joblocationcity;
     }
 
-    public void setJoblocation_city(String joblocation_city) {
-        this.joblocation_city = joblocation_city;
+    public void setJoblocation_city(String joblocationcity) {
+        this.joblocationcity = joblocationcity;
     }
 
     public String getJoblocation_state() {
-        return joblocation_state;
+        return joblocationstate;
     }
 
-    public void setJoblocation_state(String joblocation_state) {
-        this.joblocation_state = joblocation_state;
+    public void setJoblocation_state(String joblocationstate) {
+        this.joblocationstate = joblocationstate;
     }
 
     public String getJoblocation_country() {
-        return joblocation_country;
+        return joblocationcountry;
     }
 
-    public void setJoblocation_country(String joblocation_country) {
-        this.joblocation_country = joblocation_country;
+    public void setJoblocation_country(String joblocationcountry) {
+        this.joblocationcountry = joblocationcountry;
     }
 
     public JobPost getJobPost() {

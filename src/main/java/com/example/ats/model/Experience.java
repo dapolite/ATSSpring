@@ -1,111 +1,30 @@
-package com.example.ats.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+/*package com.example.ats.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Table(name = "experience")
-public class Experience implements Serializable
-{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long experienceId;
+//@Entity
+public class Experience {
 
-    private Date startDate;
-    private Date endDate;
-    private String jobTitle;
-    private String experienceCompanyname;
-    private String experienceJoblocationcity;
-    private String experienceJoblocationstate;
-    private String experienceJoblocationcountry;
-    private String experienceJobdesc;
+    //@Id
+    private Long experience_Id;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
-    @PrimaryKeyJoinColumn(name = "id")
-    @JsonIgnore
-    @MapsId
-    private CandidateUser candidateUser;
+    private String expcurrent_job;
+    private Date expstart_date;
+    private Date expend_date;
+    private String expjob_title;
+    private String expcompany_name;
+    private String expjob_city;
+    private String expjob_state;
+    private String expjob_country;
+    private String expjob_desc;
 
-    public Long getExperienceId() {
-        return experienceId;
-    }
+    //@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    //@JoinColumn
+    private Candidate candidate;
 
-    public void setExperienceId(Long experienceId) {
-        this.experienceId = experienceId;
-    }
 
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
-
-    public String getExperienceCompanyname() {
-        return experienceCompanyname;
-    }
-
-    public void setExperienceCompanyname(String experienceCompanyname) {
-        this.experienceCompanyname = experienceCompanyname;
-    }
-
-    public String getExperienceJoblocationcity() {
-        return experienceJoblocationcity;
-    }
-
-    public void setExperienceJoblocationcity(String experienceJoblocationcity) {
-        this.experienceJoblocationcity = experienceJoblocationcity;
-    }
-
-    public String getExperienceJoblocationstate() {
-        return experienceJoblocationstate;
-    }
-
-    public void setExperienceJoblocationstate(String experienceJoblocationstate) {
-        this.experienceJoblocationstate = experienceJoblocationstate;
-    }
-
-    public String getExperienceJoblocationcountry() {
-        return experienceJoblocationcountry;
-    }
-
-    public void setExperienceJoblocationcountry(String experienceJoblocationcountry) {
-        this.experienceJoblocationcountry = experienceJoblocationcountry;
-    }
-
-    public String getExperienceJobdesc() {
-        return experienceJobdesc;
-    }
-
-    public void setExperienceJobdesc(String experienceJobdesc) {
-        this.experienceJobdesc = experienceJobdesc;
-    }
-
-    public CandidateUser getCandidateUser() {
-        return candidateUser;
-    }
-
-    public void setCandidateUser(CandidateUser candidateUser) {
-        this.candidateUser = candidateUser;
+    public Experience() {
     }
 }
+*/

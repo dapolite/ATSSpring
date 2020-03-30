@@ -1,6 +1,7 @@
 package com.example.ats.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 
@@ -8,51 +9,53 @@ import javax.persistence.*;
 public class Industry {
 
     @Id
-    private Long industry_id;
-    private String industry_name;
+    @NotNull
+    @Column(name = "ID", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long industryid;
+    private String industryname;
+
+/*    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "recid")
+    @JsonIgnore
+    private RecruiterUser recruiterUser;*/
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn(name = "recid")
+    @JoinColumn(name = "jpid")
     @JsonIgnore
-    RecruiterUser recruiterUser;
+    private JobPost jobPost;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn(name = "jpid")
+    @JoinColumn(name = "canid")
     @JsonIgnore
-    JobPost jobPost;
+    private CandidateUser candidateUser;
 
     public Industry(){}
 
-    public Industry(Long industry_id, String industry_name, RecruiterUser recruiterUser, JobPost jobPost) {
-        this.industry_id = industry_id;
-        this.industry_name = industry_name;
-        this.recruiterUser = recruiterUser;
-        this.jobPost = jobPost;
-    }
 
     public Long getIndustry_id() {
-        return industry_id;
+        return industryid;
     }
 
     public void setIndustry_id(Long industry_id) {
-        this.industry_id = industry_id;
+        this.industryid = industryid;
     }
 
     public String getIndustry_name() {
-        return industry_name;
+        return industryname;
     }
 
     public void setIndustry_name(String industry_name) {
-        this.industry_name = industry_name;
+        this.industryname = industryname;
     }
 
-    public RecruiterUser getRecruiterUser() {
+/*    public RecruiterUser getRecruiterUser() {
         return recruiterUser;
     }
 
     public void setRecruiterUser(RecruiterUser recruiterUser) {
         this.recruiterUser = recruiterUser;
-    }
+    }*/
 
     public JobPost getJobPost() {
         return jobPost;
@@ -60,5 +63,13 @@ public class Industry {
 
     public void setJobPost(JobPost jobPost) {
         this.jobPost = jobPost;
+    }
+
+    public CandidateUser getCandidateUser() {
+        return candidateUser;
+    }
+
+    public void setCandidateUser(CandidateUser candidateUser) {
+        this.candidateUser = candidateUser;
     }
 }

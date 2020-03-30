@@ -23,7 +23,7 @@ public class RecruiterUserDetails implements UserDetails {
         this.userName=users.getUserName();
         this.password=users.getPassword();
         this.accountisactive=users.isAccountisactive();
-//        this.authorities=Arrays.stream(users.getUsertype().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+//      this.authorities=Arrays.stream(users.getUsertype().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     public RecruiterUserDetails(){}
