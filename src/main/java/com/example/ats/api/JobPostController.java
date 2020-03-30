@@ -44,6 +44,7 @@ public class JobPostController {
         }).orElseThrow(() -> new ResourceNotFoundException("PostId " + recid + " not found"));
     }
 
+
     @PutMapping("/jobs/{id}")
     public void updateJobPost(
             @PathVariable(value = "id") Long jobId, @Valid @RequestBody JobPost jobPost)

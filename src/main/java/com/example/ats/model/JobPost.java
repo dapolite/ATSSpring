@@ -17,10 +17,16 @@ public class JobPost implements Serializable {
         private Long jobpostid;
 
         @Temporal(TemporalType.TIMESTAMP)
-        @CreatedDate
         private Date jobpostcreatedate;
         private String jobpostjobdesc;
+        private String jobpostresponsibilities;
+        private String jobposteducation;
+        private String jobpostbenefits;
+        private String jobpostexperience;
+        private String jobpostqualification;
         private boolean jobpostisactive;
+        private boolean jobisapplied;
+        private boolean jobisshortlisted;
         private int jobpostduration;
 
 
@@ -29,12 +35,53 @@ public class JobPost implements Serializable {
         @JsonIgnore
         private RecruiterUser recruiterUser;
 
-        @OneToOne(mappedBy = "jobPost", cascade = CascadeType.PERSIST)
+        @OneToOne(fetch = FetchType.LAZY,mappedBy = "jobPost", cascade = CascadeType.ALL)
         @JoinColumn(name="jobtypeid")
         private JobType jobType;
 
-        @OneToOne(mappedBy = "jobPost", cascade = CascadeType.PERSIST)
+        @OneToOne(fetch = FetchType.LAZY,mappedBy = "jobPost", cascade = CascadeType.ALL)
+        @JoinColumn(name="joblocationid")
         private JobLocation jobLocation;
+
+        public String getJobpostresponsibilities() {
+                return jobpostresponsibilities;
+        }
+
+        public void setJobpostresponsibilities(String jobpostresponsibilities) {
+                this.jobpostresponsibilities = jobpostresponsibilities;
+        }
+
+        public String getJobposteducation() {
+                return jobposteducation;
+        }
+
+        public void setJobposteducation(String jobposteducation) {
+                this.jobposteducation = jobposteducation;
+        }
+
+        public String getJobpostbenefits() {
+                return jobpostbenefits;
+        }
+
+        public void setJobpostbenefits(String jobpostbenefits) {
+                this.jobpostbenefits = jobpostbenefits;
+        }
+
+        public String getJobpostexperience() {
+                return jobpostexperience;
+        }
+
+        public void setJobpostexperience(String jobpostexperience) {
+                this.jobpostexperience = jobpostexperience;
+        }
+
+        public String getJobpostqualification() {
+                return jobpostqualification;
+        }
+
+        public void setJobpostqualification(String jobpostqualification) {
+                this.jobpostqualification = jobpostqualification;
+        }
 
         public Long getJobpostid() {
                 return jobpostid;
@@ -49,6 +96,7 @@ public class JobPost implements Serializable {
         }
 
         public void setJobpostcreatedate(Date jobpostcreatedate) {
+                jobpostcreatedate=new Date();
                 this.jobpostcreatedate = jobpostcreatedate;
         }
 
@@ -98,5 +146,21 @@ public class JobPost implements Serializable {
 
         public void setJobLocation(JobLocation jobLocation) {
                 this.jobLocation = jobLocation;
+        }
+
+        public boolean isJobisapplied() {
+                return jobisapplied;
+        }
+
+        public void setJobisapplied(boolean jobisapplied) {
+                this.jobisapplied = jobisapplied;
+        }
+
+        public boolean isJobisshortlisted() {
+                return jobisshortlisted;
+        }
+
+        public void setJobisshortlisted(boolean jobisshortlisted) {
+                this.jobisshortlisted = jobisshortlisted;
         }
 }

@@ -15,8 +15,11 @@ public class JobType implements Serializable {
     private String jobtypename;
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "jobpost_id", nullable = false)
     @JsonIgnore
     private JobPost jobPost;
+
+    public JobType(){}
 
     public JobType(Long jobtypeid, String jobtypename, JobPost jobPost) {
         this.jobtypeid = jobtypeid;

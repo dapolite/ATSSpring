@@ -1,5 +1,7 @@
 package com.example.ats.api;
 
+import com.example.ats.model.JobLocation;
+import com.example.ats.model.JobPost;
 import com.example.ats.model.JobType;
 import com.example.ats.model.Skill;
 import com.example.ats.repository.JobPostRepository;
@@ -9,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/api/JobPost/type")
+@RequestMapping("/api/JobPost/Type")
 public class JobTypeController {
 
     @Autowired
@@ -21,17 +25,50 @@ public class JobTypeController {
     @Autowired
     private JobPostRepository jobPostRepository;
 
-    @PostMapping("/{jobpostId}")
-    public JobType createJobType(@PathVariable(value = "jobpostId") Long jobpostId,@Valid @RequestBody  JobType jobType) throws Exception {
-        return jobPostRepository.findById(jobpostId).map(jobpost -> {
-            jobType.setJobPost(jobpost);
-            return jobTypeRepository.save(jobType);
-            }).orElseThrow(() -> new ResourceNotFoundException("JobPost " + jobpostId + " not found"));
-        }
 
+    @PostMapping("/{jobid}")
+    public JobType createJobType(@PathVariable (value = "jobid") Long jobid, @Valid @RequestBody  JobType jobType) throws Exception {
+
+        return jobPostRepository.findById(jobid).map(job -> {
+            jobType.setJobPost(job);
+            return jobTypeRepository.save(jobType);
+        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + jobid + " not found"));
+    }
 
         @GetMapping("/jobtypelist")
             public List<JobType> getAllSJobType(){
             return jobTypeRepository.findAll();
         }
+
+    @GetMapping("/{jobid}")
+    public void getJobTypeById(@PathVariable(value = "id") Long jobId) {
+        jobTypeRepository.findById(jobId)
+                .orElseThrow(() -> new ResourceNotFoundException("JobLocation", "id", jobId));
+    }
+
+    @PutMapping("/{id}")
+    public JobType updateJobType(
+            @PathVariable(value = "id") Long jobId, @Valid @RequestBody JobType jobType)
+            throws ResourceNotFoundException {
+        JobType jobt=
+                jobTypeRepository
+                        .findById(jobId)
+                        .orElseThrow(() -> new ResourceNotFoundException("JobLocation not found on :: " + jobId));
+        jobt.setJobtypename(jobt.getJobtypename());
+        jobt.setJobPost(jobt.getJobPost());
+        return jobTypeRepository.save(jobType);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long jobPostId) throws Exception {
+        JobPost jobPost =
+                jobPostRepository
+                        .findById(jobPostId)
+                        .orElseThrow(() -> new ResourceNotFoundException("Users not found on :: " + jobPostId));
+        jobPostRepository.delete(jobPost);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
+    }
 }

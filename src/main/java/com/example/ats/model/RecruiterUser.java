@@ -19,7 +19,7 @@ public class RecruiterUser implements Serializable {
     @Id
     @NotNull
     @Column(name = "ID", updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long Id;
 
     private String userName;
@@ -35,38 +35,22 @@ public class RecruiterUser implements Serializable {
     private String companyaddress;
     private String companywebsite;
 
+    private Byte companypic;
+
 
 
     @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
     private Date registerdate;
 
     @OneToMany(mappedBy = "recruiterUser", cascade = CascadeType.PERSIST)
     private Set<JobPost> jobpost=new HashSet<>();
 
-    @OneToMany(mappedBy = "recruiterUser", cascade = CascadeType.ALL)
-    private  Set<Industry> industry;
+/*    @OneToOne(mappedBy = "recruiterUser", cascade = CascadeType.ALL)
+    private Set<Industry> industry=new HashSet<>();*/
 
 
     public RecruiterUser(){}
 
-    public RecruiterUser(long id, String userName, String password, String email, String phoneno, String firstname, String lastname, boolean accountisactive, String companyname, String companydesc, String companyaddress, String companywebsite, Date registerdate, Set<JobPost> jobpost, Set<Industry> industry) {
-        Id = id;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.phoneno = phoneno;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.accountisactive = accountisactive;
-        this.companyname = companyname;
-        this.companydesc = companydesc;
-        this.companyaddress = companyaddress;
-        this.companywebsite = companywebsite;
-        this.registerdate = registerdate;
-        this.jobpost = jobpost;
-        this.industry = industry;
-    }
 
     public long getId() {
         return Id;
@@ -169,6 +153,7 @@ public class RecruiterUser implements Serializable {
     }
 
     public void setRegisterdate(Date registerdate) {
+        registerdate=new Date();
         this.registerdate = registerdate;
     }
 
@@ -180,11 +165,19 @@ public class RecruiterUser implements Serializable {
         this.jobpost = jobpost;
     }
 
-    public Set<Industry> getIndustry() {
+/*    public Set<Industry> getIndustry() {
         return industry;
     }
 
     public void setIndustry(Set<Industry> industry) {
         this.industry = industry;
+    }*/
+
+    public Byte getCompanypic() {
+        return companypic;
+    }
+
+    public void setCompanypic(Byte companypic) {
+        this.companypic = companypic;
     }
 }
