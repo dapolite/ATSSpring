@@ -19,7 +19,7 @@ public class RecruiterUserController {
     private RecruiterUserRepository recruiterRepository;
 
 
-    @GetMapping
+    @GetMapping("/recruiterlist")
     public List<RecruiterUser> getAllRecruiters(){
         return recruiterRepository.findAll();
     }
@@ -31,7 +31,7 @@ public class RecruiterUserController {
                 .orElseThrow(() -> new ResourceNotFoundException("Note", "id", recid));
     }
 
-    @PostMapping
+    @PostMapping("/Recruiter")
     public void createRecruiter(@Valid @RequestBody RecruiterUser recruiteruser) {
         recruiterRepository.save(recruiteruser);
     }

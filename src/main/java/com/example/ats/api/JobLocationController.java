@@ -2,20 +2,18 @@ package com.example.ats.api;
 
 import com.example.ats.model.JobLocation;
 import com.example.ats.model.JobPost;
-import com.example.ats.model.Skill;
 import com.example.ats.repository.JobLocationRepository;
 import com.example.ats.repository.JobPostRepository;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/JobPost/Location")
+@RequestMapping("api/jobpost/location")
 public class JobLocationController {
 
     @Autowired

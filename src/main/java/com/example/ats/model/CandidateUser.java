@@ -44,6 +44,14 @@ public class CandidateUser implements Serializable {
     @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
     private Set<Skill> skills;
 
+    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
+    private Set<CandidateResume> candidateResumes;
+
+    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
+    private Set<Education> educations;
+
+    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
+    private Set<Experience> experiences;
 
     public CandidateUser(long id, Date date, String usertype, String userName, String password, String email, String phoneno, boolean accountisactive, String candidate_fname, String candidate_lname, String candidate_address, String candidate_about, String candidate_profpic, String candidateloc_city, String candidateloc_state, String candidateloc_country, Date registerdate) {
         Id = id;
@@ -201,5 +209,29 @@ public class CandidateUser implements Serializable {
 
     public void setSkills(Set<Skill> skills) {
         this.skills = skills;
+    }
+
+    public Set<CandidateResume> getCandidateResumes() {
+        return candidateResumes;
+    }
+
+    public void setCandidateResumes(Set<CandidateResume> candidateResumes) {
+        this.candidateResumes = candidateResumes;
+    }
+
+    public Set<Education> getEducations() {
+        return educations;
+    }
+
+    public void setEducations(Set<Education> educations) {
+        this.educations = educations;
+    }
+
+    public Set<Experience> getExperiences() {
+        return experiences;
+    }
+
+    public void setExperiences(Set<Experience> experiences) {
+        this.experiences = experiences;
     }
 }

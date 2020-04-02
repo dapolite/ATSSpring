@@ -8,15 +8,16 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name="job_post")
 public class JobPost implements Serializable {
 
         @Id
-        @GeneratedValue(strategy=GenerationType.IDENTITY)
         private Long jobpostid;
 
-        @Temporal(TemporalType.TIMESTAMP)
         private Date jobpostcreatedate;
         private String jobpostjobdesc;
         private String jobpostresponsibilities;
@@ -33,6 +34,7 @@ public class JobPost implements Serializable {
         @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
         @PrimaryKeyJoinColumn(name = "id")
         @JsonIgnore
+        @MapsId
         private RecruiterUser recruiterUser;
 
         @OneToOne(fetch = FetchType.LAZY,mappedBy = "jobPost", cascade = CascadeType.ALL)

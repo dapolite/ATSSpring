@@ -1,22 +1,19 @@
 package com.example.ats.api;
 
-import com.example.ats.model.JobLocation;
 import com.example.ats.model.JobPost;
 import com.example.ats.model.JobType;
-import com.example.ats.model.Skill;
 import com.example.ats.repository.JobPostRepository;
 import com.example.ats.repository.JobTypeRepository;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/JobPost/Type")
+@RequestMapping("/api/jobpost/type")
 public class JobTypeController {
 
     @Autowired
@@ -24,27 +21,6 @@ public class JobTypeController {
 
     @Autowired
     private JobPostRepository jobPostRepository;
-
-
-    @PostMapping("/{jobid}")
-    public JobType createJobType(@PathVariable (value = "jobid") Long jobid, @Valid @RequestBody  JobType jobType) throws Exception {
-
-        return jobPostRepository.findById(jobid).map(job -> {
-            jobType.setJobPost(job);
-            return jobTypeRepository.save(jobType);
-        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + jobid + " not found"));
-    }
-
-        @GetMapping("/jobtypelist")
-            public List<JobType> getAllSJobType(){
-            return jobTypeRepository.findAll();
-        }
-
-    @GetMapping("/{jobid}")
-    public void getJobTypeById(@PathVariable(value = "id") Long jobId) {
-        jobTypeRepository.findById(jobId)
-                .orElseThrow(() -> new ResourceNotFoundException("JobLocation", "id", jobId));
-    }
 
     @PutMapping("/{id}")
     public JobType updateJobType(

@@ -37,8 +37,6 @@ public class RecruiterUser implements Serializable {
 
     private Byte companypic;
 
-
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date registerdate;
 

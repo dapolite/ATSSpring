@@ -3,9 +3,11 @@ package com.example.ats.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class JobLocation {
+@Table(name="job_location")
+public class JobLocation implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

@@ -24,27 +24,6 @@ public class JobPostController {
     @Autowired
     RecruiterUserRepository recruiterUserRepository;
 
-    @GetMapping
-    public List<JobPost> getAllJobs(){
-        return jobPostRepository.findAll();
-    }
-
-    @GetMapping("/{jobid}")
-    public void getJobById(@PathVariable(value = "id") Long jobId) {
-        jobPostRepository.findById(jobId)
-                .orElseThrow(() -> new ResourceNotFoundException("JobPost", "id", jobId));
-    }
-
-    @PostMapping("/{recid}")
-    public JobPost createJob(@PathVariable (value = "recid") Long recid, @Valid @RequestBody  JobPost jobPost) throws Exception {
-
-       return recruiterUserRepository.findById(recid).map(user -> {
-            jobPost.setRecruiterUser(user);
-            return jobPostRepository.save(jobPost);
-        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + recid + " not found"));
-    }
-
-
     @PutMapping("/jobs/{id}")
     public void updateJobPost(
             @PathVariable(value = "id") Long jobId, @Valid @RequestBody JobPost jobPost)

@@ -6,26 +6,18 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name="job_type")
 public class JobType implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long jobtypeid;
 
     private String jobtypename;
 
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "jobpost_id", nullable = false)
+    @PrimaryKeyJoinColumn(name = "id")
     @JsonIgnore
     private JobPost jobPost;
-
-    public JobType(){}
-
-    public JobType(Long jobtypeid, String jobtypename, JobPost jobPost) {
-        this.jobtypeid = jobtypeid;
-        this.jobtypename = jobtypename;
-        this.jobPost = jobPost;
-    }
 
     public Long getJobtypeid() {
         return jobtypeid;

@@ -1,8 +1,6 @@
 package com.example.ats.api;
 
-import com.example.ats.model.CandidateUser;
 import com.example.ats.model.Education;
-import com.example.ats.model.Skill;
 import com.example.ats.repository.CandidateUserRepository;
 import com.example.ats.repository.EducationRepository;
 import org.elasticsearch.ResourceNotFoundException;
