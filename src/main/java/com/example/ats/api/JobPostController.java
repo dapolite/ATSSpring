@@ -1,5 +1,6 @@
 package com.example.ats.api;
 
+import com.example.ats.model.CandidateResume;
 import com.example.ats.model.JobPost;
 import com.example.ats.model.RecruiterUser;
 import com.example.ats.model.Skill;
@@ -23,6 +24,19 @@ public class JobPostController {
 
     @Autowired
     RecruiterUserRepository recruiterUserRepository;
+
+    @GetMapping
+    public List<JobPost> getAllPost(){
+        return jobPostRepository.findAll();
+    }
+
+    @PostMapping("/{recid}")
+    public JobPost createPost(@PathVariable (value = "recid") Long recid, @Valid @RequestBody JobPost jobPost) throws Exception{
+        return recruiterUserRepository.findById(recid).map(user -> {
+            jobPost.setRecruiterUser(user);
+            return jobPostRepository.save(jobPost);
+        }).orElseThrow(() -> new ResourceNotFoundException("RecruiterId " + recid + " not found"));
+    }
 
     @PutMapping("/jobs/{id}")
     public void updateJobPost(
