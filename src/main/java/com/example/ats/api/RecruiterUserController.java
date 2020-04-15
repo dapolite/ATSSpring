@@ -31,7 +31,8 @@ public class RecruiterUserController {
                 .orElseThrow(() -> new ResourceNotFoundException("Note", "id", recid));
     }
 
-    @PostMapping("/Recruiter")
+    @PostMapping
+    @CrossOrigin(origins = "*")
     public void createRecruiter(@Valid @RequestBody RecruiterUser recruiteruser) {
         recruiterRepository.save(recruiteruser);
     }
