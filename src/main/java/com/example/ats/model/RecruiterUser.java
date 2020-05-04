@@ -28,13 +28,14 @@ public class RecruiterUser implements Serializable {
     private String phoneno;
     private String firstname;
     private String lastname;
+    private Date dob;
     private boolean accountisactive;
 
     private String companyname;
     private String companydesc;
     private String companyaddress;
     private String companywebsite;
-
+    private Date companyestdate;
     private Byte companypic;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -74,6 +75,14 @@ public class RecruiterUser implements Serializable {
         this.password = password;
     }
 
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -88,6 +97,14 @@ public class RecruiterUser implements Serializable {
 
     public void setPhoneno(String phoneno) {
         this.phoneno = phoneno;
+    }
+
+    public Date getCompanyestdate() {
+        return companyestdate;
+    }
+
+    public void setCompanyestdate(Date companyestdate) {
+        this.companyestdate = companyestdate;
     }
 
     public String getFirstname() {
