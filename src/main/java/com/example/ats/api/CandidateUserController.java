@@ -3,6 +3,7 @@ package com.example.ats.api;
 //import com.example.ats.model.Candidate;
 import com.example.ats.model.CandidateUser;
 //import com.example.ats.repository.CandidateRepository;
+import com.example.ats.repository.CandidateUserESRepository;
 import com.example.ats.repository.CandidateUserRepository;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class CandidateUserController {
 
     @Autowired
     private CandidateUserRepository candidateRepository;
+
+    @Autowired
+    private CandidateUserESRepository candidateUserESRepository;
 
     @RequestMapping("/homecan")
     public String home(){
