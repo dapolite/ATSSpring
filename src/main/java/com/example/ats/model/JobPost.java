@@ -16,6 +16,7 @@ import java.util.Set;
 public class JobPost implements Serializable {
 
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long jobpostid;
 
         private Date jobpostcreatedate;
@@ -34,16 +35,21 @@ public class JobPost implements Serializable {
         @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
         @PrimaryKeyJoinColumn(name = "id")
         @JsonIgnore
-        @MapsId
         private RecruiterUser recruiterUser;
 
-        @OneToOne(fetch = FetchType.LAZY,mappedBy = "jobPost", cascade = CascadeType.ALL)
-        @JoinColumn(name="jobtypeid")
-        private JobType jobType;
+        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.PERSIST)
+        private Set<JobType> jobType = new HashSet<>();
 
-        @OneToOne(fetch = FetchType.LAZY,mappedBy = "jobPost", cascade = CascadeType.ALL)
-        @JoinColumn(name="joblocationid")
-        private JobLocation jobLocation;
+        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.PERSIST)
+        private Set<JobLocation> jobLocations = new HashSet<>();
+
+//        @OneToOne(fetch = FetchType.LAZY,mappedBy = "jobPost", cascade = CascadeType.ALL)
+//        @JoinColumn(name="jobtypeid")
+//        private JobType jobType;
+//
+//        @OneToOne(fetch = FetchType.LAZY,mappedBy = "jobPost", cascade = CascadeType.ALL)
+//        @JoinColumn(name="joblocationid")
+//        private JobLocation jobLocation;
 
         public String getJobpostresponsibilities() {
                 return jobpostresponsibilities;
@@ -134,20 +140,37 @@ public class JobPost implements Serializable {
                 this.recruiterUser = recruiterUser;
         }
 
-        public JobType getJobType() {
+//        public JobType getJobType() {
+//                return jobType;
+//        }
+//
+//        public void setJobType(JobType jobType) {
+//                this.jobType = jobType;
+//        }
+//
+//        public JobLocation getJobLocation() {
+//                return jobLocation;
+//        }
+//
+//        public void setJobLocation(JobLocation jobLocation) {
+//                this.jobLocation = jobLocation;
+//        }
+
+
+        public Set<JobType> getJobType() {
                 return jobType;
         }
 
-        public void setJobType(JobType jobType) {
+        public void setJobType(Set<JobType> jobType) {
                 this.jobType = jobType;
         }
 
-        public JobLocation getJobLocation() {
-                return jobLocation;
+        public Set<JobLocation> getJobLocations() {
+                return jobLocations;
         }
 
-        public void setJobLocation(JobLocation jobLocation) {
-                this.jobLocation = jobLocation;
+        public void setJobLocations(Set<JobLocation> jobLocations) {
+                this.jobLocations = jobLocations;
         }
 
         public boolean isJobisapplied() {

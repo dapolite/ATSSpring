@@ -16,7 +16,7 @@ public class RecruiterUser implements Serializable {
     @Id
     @NotNull
     @Column(name = "ID", updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long Id;
 
     private String userName;
@@ -46,7 +46,6 @@ public class RecruiterUser implements Serializable {
 
 
     public RecruiterUser(){}
-
 
     public long getId() {
         return Id;

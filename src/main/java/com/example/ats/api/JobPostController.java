@@ -46,7 +46,7 @@ public class JobPostController {
                 jobPostRepository
                         .findById(jobId)
                         .orElseThrow(() -> new ResourceNotFoundException("JobPost not found on :: " + jobId));
-        job.setJobLocation(job.getJobLocation());
+        job.setJobLocations(job.getJobLocations());
         job.setJobpostduration(job.getJobpostduration());
         job.setJobpostjobdesc(job.getJobpostjobdesc());
         jobPostRepository.save(jobPost);
