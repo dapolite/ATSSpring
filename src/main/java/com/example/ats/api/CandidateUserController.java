@@ -29,6 +29,11 @@ public class CandidateUserController {
         return "Hello9";
     }
 
+//    @GetMapping("/candidatelist")
+//    public Iterable<CandidateUser> getAllCandidates(){
+//        return candidateRepository.findAll();
+//    }
+
     @GetMapping("/candidatelist")
     public List<CandidateUser> getAllCandidates(){
         return candidateRepository.findAll();
@@ -53,7 +58,8 @@ public class CandidateUserController {
                 .orElseThrow(() -> new ResourceNotFoundException("Note", "id", canId));
     }
 
-    @PostMapping("/candidate")
+    @PostMapping
+    @CrossOrigin(origins = "*")
     public void createCandidate(@Valid @RequestBody CandidateUser candidate) {
         candidateRepository.save(candidate);
     }

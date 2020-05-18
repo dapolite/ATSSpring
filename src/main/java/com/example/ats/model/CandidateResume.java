@@ -12,6 +12,7 @@ import java.util.Date;
 public class CandidateResume implements Serializable
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long resumeId;
 
     private Date candidate_dob;

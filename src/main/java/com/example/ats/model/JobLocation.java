@@ -12,26 +12,18 @@ public class JobLocation implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long joblocationId;
+
     private String joblocationaddress;
     private String joblocationcity;
     private String joblocationstate;
     private String joblocationcountry;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "id")
     @JsonIgnore
     private JobPost jobPost;
 
     public JobLocation(){}
-
-    public JobLocation(Long joblocation_Id, String joblocationaddress, String joblocationcity, String joblocationstate, String joblocationcountry, JobPost jobPost) {
-        this.joblocationId = joblocationId;
-        this.joblocationaddress = joblocationaddress;
-        this.joblocationcity = joblocationcity;
-        this.joblocationstate = joblocationstate;
-        this.joblocationcountry = joblocationcountry;
-        this.jobPost = jobPost;
-    }
 
     public Long getJoblocation_Id() {
         return joblocationId;

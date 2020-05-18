@@ -1,5 +1,6 @@
 package com.example.ats.api;
 
+import com.example.ats.model.JobLocation;
 import com.example.ats.model.JobPost;
 import com.example.ats.model.JobType;
 import com.example.ats.repository.JobPostRepository;
@@ -17,10 +18,18 @@ import java.util.Map;
 public class JobTypeController {
 
     @Autowired
-    private JobTypeRepository jobTypeRepository;
+    JobTypeRepository jobTypeRepository;
 
     @Autowired
-    private JobPostRepository jobPostRepository;
+    JobPostRepository jobPostRepository;
+
+    @PostMapping("/{jobId}")
+    public JobType createJobType(@PathVariable(value = "jobId") @Valid @RequestBody Long jobId, JobType jobType) throws Exception {
+        return jobPostRepository.findById(jobId).map(jobPost -> {
+            jobType.setJobPost(jobPost);
+            return jobTypeRepository.save(jobType);
+        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + jobId + " not found"));
+    }
 
     @PutMapping("/{id}")
     public JobType updateJobType(
