@@ -21,7 +21,6 @@ public class Education implements Serializable
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     @PrimaryKeyJoinColumn(name = "id")
     @JsonIgnore
-    @MapsId
     private CandidateUser candidateUser;
 
     public Long getEducationId() {

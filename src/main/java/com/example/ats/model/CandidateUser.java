@@ -2,6 +2,8 @@ package com.example.ats.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +15,6 @@ import java.util.Set;
 
 @Entity
 @Table(name="candidate_user")
-//@MappedSuperclass
 public class CandidateUser implements Serializable {
 
     @Id
@@ -22,26 +23,26 @@ public class CandidateUser implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long Id;
 
-    Date date;
-    private String usertype;
+    private String usertype = "CANDIDATE";
     private String userName;
     private String password;
     private String email;
+    private Date dob;
     private String phoneno;
     private boolean accountisactive;
     private String candidate_fname;
     private String candidate_lname;
     private String candidate_address;
     private String candidate_about;
-    private String candidate_profpic;
+    private Byte candidate_profpic;
     private String candidateloc_city;
     private String candidateloc_state;
     private String candidateloc_country;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @CreationTimestamp
     private Date registerdate;
 
-    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL    )
     private Set<Skill> skills;
 
     @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
@@ -52,26 +53,6 @@ public class CandidateUser implements Serializable {
 
     @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
     private Set<Experience> experiences;
-
-    public CandidateUser(long id, Date date, String usertype, String userName, String password, String email, String phoneno, boolean accountisactive, String candidate_fname, String candidate_lname, String candidate_address, String candidate_about, String candidate_profpic, String candidateloc_city, String candidateloc_state, String candidateloc_country, Date registerdate) {
-        Id = id;
-        this.date = date;
-        this.usertype = usertype;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.phoneno = phoneno;
-        this.accountisactive = accountisactive;
-        this.candidate_fname = candidate_fname;
-        this.candidate_lname = candidate_lname;
-        this.candidate_address = candidate_address;
-        this.candidate_about = candidate_about;
-        this.candidate_profpic = candidate_profpic;
-        this.candidateloc_city = candidateloc_city;
-        this.candidateloc_state = candidateloc_state;
-        this.candidateloc_country = candidateloc_country;
-        this.registerdate = registerdate;
-    }
 
     public CandidateUser(){}
 
@@ -87,15 +68,23 @@ public class CandidateUser implements Serializable {
         return usertype;
     }
 
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
     public void setUsertype(String usertype) {
         this.usertype = usertype;
     }
 
-    public String getUsername() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setUsername(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 
@@ -171,11 +160,11 @@ public class CandidateUser implements Serializable {
         this.candidate_about = candidate_about;
     }
 
-    public String getCandidate_profpic() {
+    public Byte getCandidate_profpic() {
         return candidate_profpic;
     }
 
-    public void setCandidate_profpic(String candidate_profpic) {
+    public void setCandidate_profpic(Byte candidate_profpic) {
         this.candidate_profpic = candidate_profpic;
     }
 

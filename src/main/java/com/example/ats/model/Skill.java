@@ -19,7 +19,6 @@ public class Skill implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "id")
     @JsonIgnore
-    @MapsId
     private CandidateUser candidateUser;
 
     public String getSkillName() {

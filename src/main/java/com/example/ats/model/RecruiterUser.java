@@ -1,12 +1,9 @@
 package com.example.ats.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
-import org.springframework.data.annotation.CreatedDate;
-
+import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,7 +35,7 @@ public class RecruiterUser implements Serializable {
     private Date companyestdate;
     private Byte companypic;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Date registerdate;
 
     @OneToMany(mappedBy = "recruiterUser", cascade = CascadeType.PERSIST)
