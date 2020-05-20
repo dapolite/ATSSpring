@@ -23,7 +23,7 @@ public class JobLocationController {
     JobLocationRepository jobLocationRepository;
 
     @PostMapping("/{jobId}")
-    public JobLocation createJobLocation(@PathVariable(value = "jobId") @Valid @RequestBody Long jobId, JobLocation jobLocation) throws Exception {
+    public JobLocation createJobLocation(@PathVariable(value = "jobId") Long jobId,@Valid @RequestBody JobLocation jobLocation) throws Exception {
         return jobPostRepository.findById(jobId).map(jobPost -> {
             jobLocation.setJobPost(jobPost);
             return jobLocationRepository.save(jobLocation);
@@ -50,10 +50,10 @@ public class JobLocationController {
                 jobLocationRepository
                         .findById(jobId)
                         .orElseThrow(() -> new ResourceNotFoundException("JobLocation not found on :: " + jobId));
-        jobl.setJoblocation_address(jobl.getJoblocation_address());
-        jobl.setJoblocation_city(jobl.getJoblocation_city());
-        jobl.setJoblocation_state(jobl.getJoblocation_state());
-        jobl.setJoblocation_country(jobl.getJoblocation_country());
+        jobl.setJobaddress(jobl.getJobaddress());
+        jobl.setJobcity(jobl.getJobcity());
+        jobl.setJobstate(jobl.getJobstate());
+        jobl.setJobcountry(jobl.getJobcountry());
         return jobLocationRepository.save(jobLocation);
     }
 

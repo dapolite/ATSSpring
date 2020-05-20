@@ -32,24 +32,19 @@ public class JobPost implements Serializable {
         private int jobpostduration;
 
 
-        @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+        @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
         @PrimaryKeyJoinColumn(name = "id")
         @JsonIgnore
         private RecruiterUser recruiterUser;
 
-        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.PERSIST)
+        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.ALL)
+        //@JsonIgnore
         private Set<JobType> jobType = new HashSet<>();
 
-        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.PERSIST)
+        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.ALL)
+        //@JsonIgnore
         private Set<JobLocation> jobLocations = new HashSet<>();
 
-//        @OneToOne(fetch = FetchType.LAZY,mappedBy = "jobPost", cascade = CascadeType.ALL)
-//        @JoinColumn(name="jobtypeid")
-//        private JobType jobType;
-//
-//        @OneToOne(fetch = FetchType.LAZY,mappedBy = "jobPost", cascade = CascadeType.ALL)
-//        @JoinColumn(name="joblocationid")
-//        private JobLocation jobLocation;
 
         public String getJobpostresponsibilities() {
                 return jobpostresponsibilities;
@@ -139,22 +134,6 @@ public class JobPost implements Serializable {
         public void setRecruiterUser(RecruiterUser recruiterUser) {
                 this.recruiterUser = recruiterUser;
         }
-
-//        public JobType getJobType() {
-//                return jobType;
-//        }
-//
-//        public void setJobType(JobType jobType) {
-//                this.jobType = jobType;
-//        }
-//
-//        public JobLocation getJobLocation() {
-//                return jobLocation;
-//        }
-//
-//        public void setJobLocation(JobLocation jobLocation) {
-//                this.jobLocation = jobLocation;
-//        }
 
 
         public Set<JobType> getJobType() {

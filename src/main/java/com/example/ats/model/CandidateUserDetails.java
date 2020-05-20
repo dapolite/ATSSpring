@@ -19,7 +19,7 @@ public class CandidateUserDetails implements UserDetails {
     private List<GrantedAuthority> authorities;
 
     public CandidateUserDetails(CandidateUser users) {
-        this.userName=users.getUserName();
+        this.userName=users.getUsername();
         this.password=users.getPassword();
         this.accountisactive=users.isAccountisactive();
 //        this.authorities=Arrays.stream(users.getUsertype().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());

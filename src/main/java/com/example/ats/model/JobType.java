@@ -3,6 +3,7 @@ package com.example.ats.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -12,9 +13,8 @@ public class JobType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long jobtypeid;
-
+    @NotNull
     private String jobtypename;
-
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "id")
     @JsonIgnore

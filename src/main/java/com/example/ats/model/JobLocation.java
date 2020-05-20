@@ -13,56 +13,54 @@ public class JobLocation implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long joblocationId;
 
-    private String joblocationaddress;
-    private String joblocationcity;
-    private String joblocationstate;
-    private String joblocationcountry;
+    private String jobaddress;
+    private String jobcity;
+    private String jobstate;
+    private String jobcountry;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "id")
     @JsonIgnore
     private JobPost jobPost;
 
-    public JobLocation(){}
-
-    public Long getJoblocation_Id() {
+    public Long getJoblocationId() {
         return joblocationId;
     }
 
-    public void setJoblocation_Id(Long joblocationId) {
+    public void setJoblocationId(Long joblocationId) {
         this.joblocationId = joblocationId;
     }
 
-    public String getJoblocation_address() {
-        return joblocationaddress;
+    public String getJobaddress() {
+        return jobaddress;
     }
 
-    public void setJoblocation_address(String joblocationaddress) {
-        this.joblocationaddress = joblocationaddress;
+    public void setJobaddress(String jobaddress) {
+        this.jobaddress = jobaddress;
     }
 
-    public String getJoblocation_city() {
-        return joblocationcity;
+    public String getJobcity() {
+        return jobcity;
     }
 
-    public void setJoblocation_city(String joblocationcity) {
-        this.joblocationcity = joblocationcity;
+    public void setJobcity(String jobcity) {
+        this.jobcity = jobcity;
     }
 
-    public String getJoblocation_state() {
-        return joblocationstate;
+    public String getJobstate() {
+        return jobstate;
     }
 
-    public void setJoblocation_state(String joblocationstate) {
-        this.joblocationstate = joblocationstate;
+    public void setJobstate(String jobstate) {
+        this.jobstate = jobstate;
     }
 
-    public String getJoblocation_country() {
-        return joblocationcountry;
+    public String getJobcountry() {
+        return jobcountry;
     }
 
-    public void setJoblocation_country(String joblocationcountry) {
-        this.joblocationcountry = joblocationcountry;
+    public void setJobcountry(String jobcountry) {
+        this.jobcountry = jobcountry;
     }
 
     public JobPost getJobPost() {

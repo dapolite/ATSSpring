@@ -24,9 +24,10 @@ public class JobTypeController {
     JobPostRepository jobPostRepository;
 
     @PostMapping("/{jobId}")
-    public JobType createJobType(@PathVariable(value = "jobId") @Valid @RequestBody Long jobId, JobType jobType) throws Exception {
+    public JobType createJobType(@PathVariable(value = "jobId") Long jobId, @Valid @RequestBody  JobType jobType) throws Exception {
         return jobPostRepository.findById(jobId).map(jobPost -> {
             jobType.setJobPost(jobPost);
+//           System.out.println(jobType.getJobtypename().toString());
             return jobTypeRepository.save(jobType);
         }).orElseThrow(() -> new ResourceNotFoundException("PostId " + jobId + " not found"));
     }
