@@ -6,6 +6,7 @@ import com.example.ats.model.CandidateUser;
 import com.example.ats.repository.CandidateUserRepository;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,7 +33,7 @@ public class CandidateUserController {
 
     @GetMapping("/candidatelist")
     public List<CandidateUser> getAllCandidates(){
-        return candidateRepository.findAll();
+        return candidateRepository.getData();
     }
 
 /*    @GetMapping("/searchcandidate")

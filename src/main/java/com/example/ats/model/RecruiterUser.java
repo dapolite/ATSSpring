@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Entity
 @Table(name="recruiter_user")
 public class RecruiterUser implements Serializable {
@@ -28,18 +27,14 @@ public class RecruiterUser implements Serializable {
     private Date dob;
     private boolean accountisactive;
 
-    private String companyname;
-    private String companydesc;
-    private String companyaddress;
-    private String companywebsite;
-    private Date companyestdate;
-    private Byte companypic;
-
     @CreationTimestamp
     private Date registerdate;
 
     @OneToMany(mappedBy = "recruiterUser", cascade = CascadeType.PERSIST)
     private Set<JobPost> jobpost=new HashSet<>();
+
+    @OneToMany(mappedBy = "recruiterUser", cascade = CascadeType.PERSIST)
+    private Set<RecruiterCompany> recruiterCompanies = new HashSet<>();
 
 /*    @OneToOne(mappedBy = "recruiterUser", cascade = CascadeType.ALL)
     private Set<Industry> industry=new HashSet<>();*/
@@ -95,14 +90,6 @@ public class RecruiterUser implements Serializable {
         this.phoneno = phoneno;
     }
 
-    public Date getCompanyestdate() {
-        return companyestdate;
-    }
-
-    public void setCompanyestdate(Date companyestdate) {
-        this.companyestdate = companyestdate;
-    }
-
     public String getFirstname() {
         return firstname;
     }
@@ -127,38 +114,6 @@ public class RecruiterUser implements Serializable {
         this.accountisactive = accountisactive;
     }
 
-    public String getCompanyname() {
-        return companyname;
-    }
-
-    public void setCompanyname(String companyname) {
-        this.companyname = companyname;
-    }
-
-    public String getCompanydesc() {
-        return companydesc;
-    }
-
-    public void setCompanydesc(String companydesc) {
-        this.companydesc = companydesc;
-    }
-
-    public String getCompanyaddress() {
-        return companyaddress;
-    }
-
-    public void setCompanyaddress(String companyaddress) {
-        this.companyaddress = companyaddress;
-    }
-
-    public String getCompanywebsite() {
-        return companywebsite;
-    }
-
-    public void setCompanywebsite(String companywebsite) {
-        this.companywebsite = companywebsite;
-    }
-
     public Date getRegisterdate() {
         return registerdate;
     }
@@ -172,23 +127,23 @@ public class RecruiterUser implements Serializable {
         return jobpost;
     }
 
-    public void setJobpos(Set<JobPost> jobpost) {
+    public void setJobpost(Set<JobPost> jobpost) {
         this.jobpost = jobpost;
     }
 
-/*    public Set<Industry> getIndustry() {
+    public Set<RecruiterCompany> getRecruiterCompanies() {
+        return recruiterCompanies;
+    }
+
+    public void setRecruiterCompanies(Set<RecruiterCompany> recruiterCompanies) {
+        this.recruiterCompanies = recruiterCompanies;
+    }
+
+    /*    public Set<Industry> getIndustry() {
         return industry;
     }
 
     public void setIndustry(Set<Industry> industry) {
         this.industry = industry;
     }*/
-
-    public Byte getCompanypic() {
-        return companypic;
-    }
-
-    public void setCompanypic(Byte companypic) {
-        this.companypic = companypic;
-    }
 }

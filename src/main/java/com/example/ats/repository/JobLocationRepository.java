@@ -1,4 +1,3 @@
-
 package com.example.ats.repository;
 
 import com.example.ats.model.JobLocation;

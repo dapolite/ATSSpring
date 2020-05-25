@@ -43,14 +43,6 @@ public class JobPost implements Serializable {
         @OneToMany(mappedBy = "jobPost", cascade = CascadeType.PERSIST)
         private Set<JobLocation> jobLocations = new HashSet<>();
 
-//        @OneToOne(fetch = FetchType.LAZY,mappedBy = "jobPost", cascade = CascadeType.ALL)
-//        @JoinColumn(name="jobtypeid")
-//        private JobType jobType;
-//
-//        @OneToOne(fetch = FetchType.LAZY,mappedBy = "jobPost", cascade = CascadeType.ALL)
-//        @JoinColumn(name="joblocationid")
-//        private JobLocation jobLocation;
-
         public String getJobpostresponsibilities() {
                 return jobpostresponsibilities;
         }
@@ -139,23 +131,6 @@ public class JobPost implements Serializable {
         public void setRecruiterUser(RecruiterUser recruiterUser) {
                 this.recruiterUser = recruiterUser;
         }
-
-//        public JobType getJobType() {
-//                return jobType;
-//        }
-//
-//        public void setJobType(JobType jobType) {
-//                this.jobType = jobType;
-//        }
-//
-//        public JobLocation getJobLocation() {
-//                return jobLocation;
-//        }
-//
-//        public void setJobLocation(JobLocation jobLocation) {
-//                this.jobLocation = jobLocation;
-//        }
-
 
         public Set<JobType> getJobType() {
                 return jobType;

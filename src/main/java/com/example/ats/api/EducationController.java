@@ -32,6 +32,11 @@ public class EducationController
 
     }
 
+//    @GetMapping("/educationlist")
+//    public List<Education> getAllEducation(){
+//        return educationRepository.getEducation();
+//    }
+
     @PostMapping("/{candid}")
     public Education createEducation(@PathVariable(value = "candid") Long candid, @Valid @RequestBody Education education) throws Exception{
         return candidateUserRepository.findById(candid).map(user -> {

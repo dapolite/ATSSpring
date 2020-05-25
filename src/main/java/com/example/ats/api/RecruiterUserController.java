@@ -49,7 +49,6 @@ public class RecruiterUserController {
         recruiter.setPassword(recruiter.getPassword());
         recruiter.setPhoneno(recruiter.getPhoneno());
         recruiter.setAccountisactive(recruiter.isAccountisactive());
-        recruiter.setCompanypic(recruiter.getCompanypic());
         recruiterRepository.save(recruiter);
     }
 

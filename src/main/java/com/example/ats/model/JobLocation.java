@@ -23,45 +23,43 @@ public class JobLocation implements Serializable {
     @JsonIgnore
     private JobPost jobPost;
 
-    public JobLocation(){}
-
-    public Long getJoblocation_Id() {
+    public Long getJoblocationId() {
         return joblocationId;
     }
 
-    public void setJoblocation_Id(Long joblocationId) {
+    public void setJoblocationId(Long joblocationId) {
         this.joblocationId = joblocationId;
     }
 
-    public String getJoblocation_address() {
+    public String getJoblocationaddress() {
         return joblocationaddress;
     }
 
-    public void setJoblocation_address(String joblocationaddress) {
+    public void setJoblocationaddress(String joblocationaddress) {
         this.joblocationaddress = joblocationaddress;
     }
 
-    public String getJoblocation_city() {
+    public String getJoblocationcity() {
         return joblocationcity;
     }
 
-    public void setJoblocation_city(String joblocationcity) {
+    public void setJoblocationcity(String joblocationcity) {
         this.joblocationcity = joblocationcity;
     }
 
-    public String getJoblocation_state() {
+    public String getJoblocationstate() {
         return joblocationstate;
     }
 
-    public void setJoblocation_state(String joblocationstate) {
+    public void setJoblocationstate(String joblocationstate) {
         this.joblocationstate = joblocationstate;
     }
 
-    public String getJoblocation_country() {
+    public String getJoblocationcountry() {
         return joblocationcountry;
     }
 
-    public void setJoblocation_country(String joblocationcountry) {
+    public void setJoblocationcountry(String joblocationcountry) {
         this.joblocationcountry = joblocationcountry;
     }
 
