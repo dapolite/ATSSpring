@@ -32,19 +32,16 @@ public class JobPost implements Serializable {
         private int jobpostduration;
 
 
-        @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+        @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
         @PrimaryKeyJoinColumn(name = "id")
         @JsonIgnore
         private RecruiterUser recruiterUser;
 
-        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.ALL)
-        //@JsonIgnore
+        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.PERSIST)
         private Set<JobType> jobType = new HashSet<>();
 
-        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.ALL)
-        //@JsonIgnore
+        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.PERSIST)
         private Set<JobLocation> jobLocations = new HashSet<>();
-
 
         public String getJobpostresponsibilities() {
                 return jobpostresponsibilities;
@@ -134,7 +131,6 @@ public class JobPost implements Serializable {
         public void setRecruiterUser(RecruiterUser recruiterUser) {
                 this.recruiterUser = recruiterUser;
         }
-
 
         public Set<JobType> getJobType() {
                 return jobType;

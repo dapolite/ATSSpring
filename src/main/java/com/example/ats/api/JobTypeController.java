@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/api/jobspost/type")
 public class JobTypeController {
 
@@ -25,10 +24,9 @@ public class JobTypeController {
     JobPostRepository jobPostRepository;
 
     @PostMapping("/{jobId}")
-    public JobType createJobType(@PathVariable(value = "jobId") Long jobId, @Valid @RequestBody  JobType jobType) throws Exception {
+    public JobType createJobType(@PathVariable(value = "jobId") Long jobId, @Valid @RequestBody JobType jobType) throws Exception {
         return jobPostRepository.findById(jobId).map(jobPost -> {
             jobType.setJobPost(jobPost);
-//           System.out.println(jobType.getJobtypename().toString());
             return jobTypeRepository.save(jobType);
         }).orElseThrow(() -> new ResourceNotFoundException("PostId " + jobId + " not found"));
     }

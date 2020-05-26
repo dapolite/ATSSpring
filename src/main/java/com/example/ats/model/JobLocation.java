@@ -13,10 +13,10 @@ public class JobLocation implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long joblocationId;
 
-    private String jobaddress;
-    private String jobcity;
-    private String jobstate;
-    private String jobcountry;
+    private String joblocationaddress;
+    private String joblocationcity;
+    private String joblocationstate;
+    private String joblocationcountry;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "id")
@@ -31,36 +31,36 @@ public class JobLocation implements Serializable {
         this.joblocationId = joblocationId;
     }
 
-    public String getJobaddress() {
-        return jobaddress;
+    public String getJoblocationaddress() {
+        return joblocationaddress;
     }
 
-    public void setJobaddress(String jobaddress) {
-        this.jobaddress = jobaddress;
+    public void setJoblocationaddress(String joblocationaddress) {
+        this.joblocationaddress = joblocationaddress;
     }
 
-    public String getJobcity() {
-        return jobcity;
+    public String getJoblocationcity() {
+        return joblocationcity;
     }
 
-    public void setJobcity(String jobcity) {
-        this.jobcity = jobcity;
+    public void setJoblocationcity(String joblocationcity) {
+        this.joblocationcity = joblocationcity;
     }
 
-    public String getJobstate() {
-        return jobstate;
+    public String getJoblocationstate() {
+        return joblocationstate;
     }
 
-    public void setJobstate(String jobstate) {
-        this.jobstate = jobstate;
+    public void setJoblocationstate(String joblocationstate) {
+        this.joblocationstate = joblocationstate;
     }
 
-    public String getJobcountry() {
-        return jobcountry;
+    public String getJoblocationcountry() {
+        return joblocationcountry;
     }
 
-    public void setJobcountry(String jobcountry) {
-        this.jobcountry = jobcountry;
+    public void setJoblocationcountry(String joblocationcountry) {
+        this.joblocationcountry = joblocationcountry;
     }
 
     public JobPost getJobPost() {

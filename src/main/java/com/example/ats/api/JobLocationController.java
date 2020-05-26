@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("api/jobspost/location")
 public class JobLocationController {
 
@@ -23,24 +22,23 @@ public class JobLocationController {
     @Autowired
     JobLocationRepository jobLocationRepository;
 
-    @PostMapping("/{jobId}")
-    public JobLocation createJobLocation(@PathVariable(value = "jobId") Long jobId,@Valid @RequestBody JobLocation jobLocation) throws Exception {
-        return jobPostRepository.findById(jobId).map(jobPost -> {
-            jobLocation.setJobPost(jobPost);
-            return jobLocationRepository.save(jobLocation);
-        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + jobId + " not found"));
-    }
-
-
-    @GetMapping("/joblocationlist")
+    @GetMapping
     public List<JobLocation> getAllJobLocation(){
         return jobLocationRepository.findAll();
     }
 
-    @GetMapping("/{jobid}")
-    public void getJobLocationById(@PathVariable(value = "id") Long jobId) {
-        jobLocationRepository.findById(jobId)
-                .orElseThrow(() -> new ResourceNotFoundException("JobLocation", "id", jobId));
+    @GetMapping("/{joblocationid}")
+    public void getJobLocationById(@PathVariable(value = "id") Long joblocationId) {
+        jobLocationRepository.findById(joblocationId)
+                .orElseThrow(() -> new ResourceNotFoundException("JobLocation", "id", joblocationId));
+    }
+
+    @PostMapping("/{jobId}")
+    public JobLocation createJobLocation(@PathVariable(value = "jobId") Long jobId, @Valid @RequestBody JobLocation jobLocation) throws Exception {
+        return jobPostRepository.findById(jobId).map(jobPost -> {
+            jobLocation.setJobPost(jobPost);
+            return jobLocationRepository.save(jobLocation);
+        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + jobId + " not found"));
     }
 
     @PutMapping("/{id}")
@@ -51,10 +49,10 @@ public class JobLocationController {
                 jobLocationRepository
                         .findById(jobId)
                         .orElseThrow(() -> new ResourceNotFoundException("JobLocation not found on :: " + jobId));
-        jobl.setJobaddress(jobl.getJobaddress());
-        jobl.setJobcity(jobl.getJobcity());
-        jobl.setJobstate(jobl.getJobstate());
-        jobl.setJobcountry(jobl.getJobcountry());
+        jobl.setJoblocationaddress(jobl.getJoblocationaddress());
+        jobl.setJoblocationcity(jobl.getJoblocationcity());
+        jobl.setJoblocationstate(jobl.getJoblocationstate());
+        jobl.setJoblocationcountry(jobl.getJoblocationcountry());
         return jobLocationRepository.save(jobLocation);
     }
 
