@@ -33,6 +33,7 @@ public class IndexingSkillListener implements ApplicationContextAware {
 
         if(skill != null) {
             skill.setCandidateUser(candidateUser);
+            skillESRepository.index(skill);
             skillESRepository.save(skill);
             System.out.println(skill.toString());
         }

@@ -3,10 +3,12 @@ package com.example.ats.api;
 //import com.example.ats.model.Candidate;
 import com.example.ats.model.CandidateUser;
 //import com.example.ats.repository.CandidateRepository;
+import com.example.ats.model.ESPojo;
 import com.example.ats.repository.CandidateUserESRepository;
 import com.example.ats.repository.CandidateUserRepository;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/candidates")
 public class CandidateUserController {
 
@@ -23,6 +26,7 @@ public class CandidateUserController {
 
     @Autowired
     private CandidateUserESRepository candidateUserESRepository;
+
 
     @RequestMapping("/homecan")
     public String home(){
@@ -36,7 +40,8 @@ public class CandidateUserController {
 
     @GetMapping("/candidatelist")
     public List<CandidateUser> getAllCandidates(){
-        return candidateRepository.findAll();
+
+        return candidateRepository.getData();
     }
 
 /*    @GetMapping("/searchcandidate")
@@ -51,6 +56,9 @@ public class CandidateUserController {
         }
     }*/
 
+    /***** Elastic Search APIs *****/
+
+
 
     @GetMapping("/candidate/{canid}")
     public void getCandidateById(@PathVariable(value = "id") Long canId) {
@@ -61,6 +69,7 @@ public class CandidateUserController {
     @PostMapping
     @CrossOrigin(origins = "*")
     public void createCandidate(@Valid @RequestBody CandidateUser candidate) {
+        candidateUserESRepository.save(candidate);
         candidateRepository.save(candidate);
     }
 

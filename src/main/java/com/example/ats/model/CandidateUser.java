@@ -6,6 +6,7 @@ import com.sun.istack.NotNull;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.stereotype.Indexed;
 
 import javax.persistence.*;
 import java.io.Serializable;
