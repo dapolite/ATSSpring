@@ -85,8 +85,5 @@ class CandidateSecurityConfig extends WebSecurityConfigurerAdapter {
         .anyRequest().authenticated()
                 .and()
         .httpBasic();
-
     }
-
-
 }

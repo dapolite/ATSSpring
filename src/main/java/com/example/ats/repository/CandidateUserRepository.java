@@ -19,7 +19,7 @@ public interface CandidateUserRepository extends JpaRepository<CandidateUser, Lo
 
     Optional<CandidateUser> findByUserName(String username);
 
-    @Query("SELECT user from CandidateUser user LEFT JOIN user.educations edu LEFT JOIN user.experiences exp LEFT JOIN user.skills sk WHERE user.Id = 235")
+    @Query("SELECT user from CandidateUser user LEFT JOIN user.educations edu LEFT JOIN user.experiences exp LEFT JOIN user.skills sk")
     List<CandidateUser> getData();
 
     @Query("SELECT u from CandidateUser u where u.userName = :username")
