@@ -16,6 +16,7 @@ public class Experience implements Serializable
     private Date endDate;
     private String jobTitle;
     private String experienceCompanyname;
+    private int experienceyears;
     private String experienceJoblocationcity;
     private String experienceJoblocationstate;
     private String experienceJoblocationcountry;
@@ -84,6 +85,14 @@ public class Experience implements Serializable
 
     public String getExperienceJoblocationcountry() {
         return experienceJoblocationcountry;
+    }
+
+    public int getExperienceyears() {
+        return experienceyears;
+    }
+
+    public void setExperienceyears(int experienceyears) {
+        this.experienceyears = experienceyears;
     }
 
     public void setExperienceJoblocationcountry(String experienceJoblocationcountry) {

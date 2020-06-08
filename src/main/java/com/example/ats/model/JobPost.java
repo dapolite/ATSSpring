@@ -25,6 +25,7 @@ public class JobPost implements Serializable {
         private String jobposteducation;
         private String jobpostbenefits;
         private String jobpostexperience;
+        private String jobpostcategory;
         private String jobpostqualification;
         private boolean jobpostisactive;
         private boolean jobisapplied;
@@ -32,15 +33,15 @@ public class JobPost implements Serializable {
         private int jobpostduration;
 
 
-        @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+        @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
         @PrimaryKeyJoinColumn(name = "id")
         @JsonIgnore
         private RecruiterUser recruiterUser;
 
-        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.PERSIST)
+        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.ALL)
         private Set<JobType> jobType = new HashSet<>();
 
-        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.PERSIST)
+        @OneToMany(mappedBy = "jobPost", cascade = CascadeType.ALL)
         private Set<JobLocation> jobLocations = new HashSet<>();
 
         public String getJobpostresponsibilities() {
@@ -162,5 +163,13 @@ public class JobPost implements Serializable {
 
         public void setJobisshortlisted(boolean jobisshortlisted) {
                 this.jobisshortlisted = jobisshortlisted;
+        }
+
+        public String getJobpostcategory() {
+                return jobpostcategory;
+        }
+
+        public void setJobpostcategory(String jobpostcategory) {
+                this.jobpostcategory = jobpostcategory;
         }
 }

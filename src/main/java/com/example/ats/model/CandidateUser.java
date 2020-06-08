@@ -2,57 +2,85 @@ package com.example.ats.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.stereotype.Indexed;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 
 @Entity
 @Table(name="candidate_user")
+//@Document(indexName = "userdetails", type = "candidate")
+//@EntityListeners({IndexingCandidateListener.class})
+//@MappedSuperclass
+
+
 public class CandidateUser implements Serializable {
 
-    @Id
+
     @NotNull
     @Column(name = "ID", updatable = false, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
+    //@org.springframework.data.annotation.Id
+    @Id
     private long Id;
 
-    private String usertype = "CANDIDATE";
+    Date date;
     private String userName;
     private String password;
     private String email;
-    private Date dob;
     private String phoneno;
     private boolean accountisactive;
     private String candidate_fname;
     private String candidate_lname;
     private String candidate_address;
     private String candidate_about;
-    private Byte candidate_profpic;
+    private String candidate_profpic;
     private String candidateloc_city;
     private String candidateloc_state;
     private String candidateloc_country;
 
-    @CreationTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Date registerdate;
 
-    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL    )
-    private Set<Skill> skills;
+    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Skill> skills=new HashSet<>();
 
-    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CandidateResume> candidateResumes;
 
-    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Education> educations;
 
-    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Experience> experiences;
+
+    public CandidateUser(long id, Date date, String userName, String password, String email, String phoneno, boolean accountisactive, String candidate_fname, String candidate_lname, String candidate_address, String candidate_about, String candidate_profpic, String candidateloc_city, String candidateloc_state, String candidateloc_country, Date registerdate) {
+        Id = id;
+        this.date = date;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.phoneno = phoneno;
+        this.accountisactive = accountisactive;
+        this.candidate_fname = candidate_fname;
+        this.candidate_lname = candidate_lname;
+        this.candidate_address = candidate_address;
+        this.candidate_about = candidate_about;
+        this.candidate_profpic = candidate_profpic;
+        this.candidateloc_city = candidateloc_city;
+        this.candidateloc_state = candidateloc_state;
+        this.candidateloc_country = candidateloc_country;
+        this.registerdate = registerdate;
+    }
 
     public CandidateUser(){}
 
@@ -64,27 +92,11 @@ public class CandidateUser implements Serializable {
         this.Id = userId;
     }
 
-    public String getUsertype() {
-        return usertype;
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
-    public void setUsertype(String usertype) {
-        this.usertype = usertype;
-    }
-
-    public String getUserName() {
+    public String getUsername() {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public void setUsername(String userName) {
         this.userName = userName;
     }
 
@@ -160,11 +172,11 @@ public class CandidateUser implements Serializable {
         this.candidate_about = candidate_about;
     }
 
-    public Byte getCandidate_profpic() {
+    public String getCandidate_profpic() {
         return candidate_profpic;
     }
 
-    public void setCandidate_profpic(Byte candidate_profpic) {
+    public void setCandidate_profpic(String candidate_profpic) {
         this.candidate_profpic = candidate_profpic;
     }
 
@@ -223,4 +235,5 @@ public class CandidateUser implements Serializable {
     public void setExperiences(Set<Experience> experiences) {
         this.experiences = experiences;
     }
+
 }
