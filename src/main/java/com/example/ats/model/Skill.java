@@ -1,7 +1,6 @@
 package com.example.ats.model;
 
-import com.example.ats.listener.IndexingCandidateListener;
-import com.example.ats.listener.IndexingSkillListener;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -13,16 +12,16 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="skill")
-@Document(indexName = "candidateskill", type = "skill")
-@EntityListeners({IndexingSkillListener.class})
+//@Document(indexName = "candidateskill", type = "skill")
+//@EntityListeners({IndexingSkillListener.class})
 public class Skill implements Serializable {
 
     @Id
-    @org.springframework.data.annotation.Id
+    //@org.springframework.data.annotation.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long skillId;
 
-    @Field(type = FieldType.Text)
+    //@Field(type = FieldType.Text)
     private String skillName;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)

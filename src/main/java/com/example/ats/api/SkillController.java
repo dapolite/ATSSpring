@@ -2,9 +2,8 @@ package com.example.ats.api;
 
 import com.example.ats.model.CandidateResume;
 import com.example.ats.model.Skill;
-import com.example.ats.repository.CandidateUserESRepository;
 import com.example.ats.repository.CandidateUserRepository;
-import com.example.ats.repository.SkillESRepository;
+
 import com.example.ats.repository.SkillRepository;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +16,17 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/skill")
 public class SkillController{
 
     @Autowired
     SkillRepository skillRepository;
 
-    @Autowired
-    SkillESRepository skillESRepository;
 
     @Autowired
     CandidateUserRepository candidateUserRepository;
 
-    @Autowired
-    CandidateUserESRepository candidateUserESRepository;
 
     ElasticsearchTemplate elasticsearchTemplate;
 

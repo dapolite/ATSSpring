@@ -15,6 +15,7 @@ public class JobType implements Serializable {
     private Long jobtypeid;
     @NotNull
     private String jobtypename;
+
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "id")
     @JsonIgnore

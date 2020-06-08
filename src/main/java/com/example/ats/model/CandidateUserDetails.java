@@ -15,6 +15,7 @@ public class CandidateUserDetails implements UserDetails {
 
     private String userName;
     private String password;
+    public Long userId;
     private Boolean accountisactive;
     private List<GrantedAuthority> authorities;
 
@@ -22,6 +23,7 @@ public class CandidateUserDetails implements UserDetails {
         this.userName=users.getUsername();
         this.password=users.getPassword();
         this.accountisactive=users.isAccountisactive();
+        this.userId=users.getUserId();
 //        this.authorities=Arrays.stream(users.getUsertype().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
@@ -60,5 +62,13 @@ public class CandidateUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return accountisactive;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

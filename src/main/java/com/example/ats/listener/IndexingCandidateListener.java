@@ -1,3 +1,4 @@
+/*
 package com.example.ats.listener;
 
 import com.example.ats.model.CandidateUser;
@@ -46,3 +47,4 @@ public class IndexingCandidateListener implements ApplicationContextAware {
         }
     }
 
+*/

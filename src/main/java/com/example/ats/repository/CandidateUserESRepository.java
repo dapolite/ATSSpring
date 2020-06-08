@@ -1,3 +1,4 @@
+/*
 package com.example.ats.repository;
 
 import com.example.ats.model.CandidateUser;
@@ -9,3 +10,4 @@ public interface CandidateUserESRepository extends ElasticsearchRepository<Candi
     CandidateUser findByUsername(String username);
 
 }
+*/

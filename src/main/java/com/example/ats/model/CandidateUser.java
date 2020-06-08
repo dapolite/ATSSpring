@@ -1,6 +1,5 @@
 package com.example.ats.model;
 
-import com.example.ats.listener.IndexingCandidateListener;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -19,8 +18,8 @@ import java.util.Set;
 
 @Entity
 @Table(name="candidate_user")
-@Document(indexName = "userdetails", type = "candidate")
-@EntityListeners({IndexingCandidateListener.class})
+//@Document(indexName = "userdetails", type = "candidate")
+//@EntityListeners({IndexingCandidateListener.class})
 //@MappedSuperclass
 
 
@@ -30,12 +29,11 @@ public class CandidateUser implements Serializable {
     @NotNull
     @Column(name = "ID", updatable = false, nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @org.springframework.data.annotation.Id
+    //@org.springframework.data.annotation.Id
     @Id
     private long Id;
 
     Date date;
-    private String usertype;
     private String userName;
     private String password;
     private String email;
@@ -53,26 +51,21 @@ public class CandidateUser implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private Date registerdate;
 
-    @Field( type = FieldType.Nested)
     @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Skill> skills=new HashSet<>();
 
-    //@Field( type = FieldType.Nested)
     @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CandidateResume> candidateResumes;
 
-    @Field( type = FieldType.Nested)
     @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Education> educations;
 
-    @Field( type = FieldType.Nested)
     @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Experience> experiences;
 
-    public CandidateUser(long id, Date date, String usertype, String userName, String password, String email, String phoneno, boolean accountisactive, String candidate_fname, String candidate_lname, String candidate_address, String candidate_about, String candidate_profpic, String candidateloc_city, String candidateloc_state, String candidateloc_country, Date registerdate) {
+    public CandidateUser(long id, Date date, String userName, String password, String email, String phoneno, boolean accountisactive, String candidate_fname, String candidate_lname, String candidate_address, String candidate_about, String candidate_profpic, String candidateloc_city, String candidateloc_state, String candidateloc_country, Date registerdate) {
         Id = id;
         this.date = date;
-        this.usertype = usertype;
         this.userName = userName;
         this.password = password;
         this.email = email;
@@ -97,14 +90,6 @@ public class CandidateUser implements Serializable {
 
     public void setUserId(long userId) {
         this.Id = userId;
-    }
-
-    public String getUsertype() {
-        return usertype;
-    }
-
-    public void setUsertype(String usertype) {
-        this.usertype = usertype;
     }
 
     public String getUsername() {
@@ -250,4 +235,5 @@ public class CandidateUser implements Serializable {
     public void setExperiences(Set<Experience> experiences) {
         this.experiences = experiences;
     }
+
 }

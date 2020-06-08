@@ -4,25 +4,40 @@ package com.example.ats.api;
 import com.example.ats.model.CandidateUser;
 //import com.example.ats.repository.CandidateRepository;
 import com.example.ats.repository.CandidateUserRepository;
+import javassist.NotFoundException;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins ="http://localhost:3000")
 @RequestMapping("/api/candidates")
 public class CandidateUserController {
 
     @Autowired
     private CandidateUserRepository candidateRepository;
 
-    @RequestMapping("/homecan")
-    public String home(){
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/homecan")
+    public String printWelcome(ModelMap model, Principal principal ){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName(); //get logged in username
+
+        model.addAttribute("username", name);
         return "Hello9";
     }
 
@@ -55,9 +70,21 @@ public class CandidateUserController {
                 .orElseThrow(() -> new ResourceNotFoundException("Note", "id", canId));
     }
 
+    @GetMapping("/{username}")
+    public CandidateUser getCandidateByUserName(@PathVariable(value = "username") String username) throws NotFoundException {
+        return candidateRepository.findUsersByCandidateUsername(username);
+    }
+
+    @GetMapping("/getId/{username}")
+    public Long getCandidateUserId(@PathVariable(value = "username") String username) throws NotFoundException {
+        return candidateRepository.findUserIdByCandidateUsername(username);
+    }
+
     @PostMapping
     @CrossOrigin(origins = "*")
     public void createCandidate(@Valid @RequestBody CandidateUser candidate) {
+        String encodedPassword = bCryptPasswordEncoder.encode(candidate.getPassword());
+        candidate.setPassword(encodedPassword);
         candidateRepository.save(candidate);
     }
 
