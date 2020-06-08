@@ -13,10 +13,10 @@ import com.example.ats.model.CandidateUser;
 @Repository
 //public interface CandidateUserRepository extends ElasticsearchRepository<CandidateUser, Long> {
 //    Optional<CandidateUser> findByUserName(String username);
-//}x``
+//}
 public interface CandidateUserRepository extends JpaRepository<CandidateUser, Long> {
     Optional<CandidateUser> findByUserName(String username);
 
-    @Query("SELECT user from CandidateUser user LEFT JOIN user.educations edu LEFT JOIN user.experiences exp LEFT JOIN user.skills sk")
+    @Query("SELECT user from CandidateUser user LEFT JOIN user.educations edu LEFT JOIN user.experiences exp LEFT JOIN user.skills sk WHERE user.Id = 235")
     List<CandidateUser> getData();
 }

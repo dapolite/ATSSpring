@@ -1,6 +1,7 @@
 package com.example.ats.api;
 
 import com.example.ats.model.RecruiterCompany;
+import com.example.ats.model.RecruiterUser;
 import com.example.ats.repository.RecruiterCompanyRepository;
 import com.example.ats.repository.RecruiterUserRepository;
 import org.elasticsearch.ResourceNotFoundException;
@@ -33,4 +34,10 @@ public class RecruiterCompanyController {
             return recruiterCompanyRepository.save(recruiterCompany);
         }).orElseThrow(() -> new ResourceNotFoundException("RecruiterId " + recid + " not found"));
     }
+
+//    @PostMapping
+//    @CrossOrigin(origins = "*")
+//    public void createRecruiterCompany(@Valid @RequestBody RecruiterCompany recruiterCompany) {
+//        recruiterCompanyRepository.save(recruiterCompany);
+//    }
 }
