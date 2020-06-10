@@ -139,6 +139,8 @@ public class RecruiterUser implements Serializable {
         this.recruiterCompanies = recruiterCompanies;
     }
 
+
+
     /*    public Set<Industry> getIndustry() {
         return industry;
     }
