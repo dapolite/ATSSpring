@@ -2,6 +2,7 @@ package com.example.ats.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -34,6 +35,7 @@ public class CandidateUser implements Serializable {
     private long Id;
 
     Date date;
+
     private String userName;
     private String password;
     private String email;
@@ -48,7 +50,7 @@ public class CandidateUser implements Serializable {
     private String candidateloc_state;
     private String candidateloc_country;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @CreationTimestamp
     private Date registerdate;
 
     @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -235,5 +237,4 @@ public class CandidateUser implements Serializable {
     public void setExperiences(Set<Experience> experiences) {
         this.experiences = experiences;
     }
-
 }

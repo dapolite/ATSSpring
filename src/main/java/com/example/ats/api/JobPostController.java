@@ -1,15 +1,11 @@
 package com.example.ats.api;
 
-import com.example.ats.model.CandidateResume;
 import com.example.ats.model.JobPost;
-import com.example.ats.model.RecruiterUser;
-import com.example.ats.model.Skill;
 import com.example.ats.repository.JobPostRepository;
 import com.example.ats.repository.RecruiterUserRepository;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -48,7 +44,7 @@ public class JobPostController {
                         .findById(jobId)
                         .orElseThrow(() -> new ResourceNotFoundException("JobPost not found on :: " + jobId));
         job.setJobLocations(job.getJobLocations());
-        job.setJobpostduration(job.getJobpostduration());
+//        job.setJobpostduration(job.getJobpostduration());
         job.setJobpostjobdesc(job.getJobpostjobdesc());
         jobPostRepository.save(jobPost);
     }

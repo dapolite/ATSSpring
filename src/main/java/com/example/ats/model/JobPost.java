@@ -2,6 +2,7 @@ package com.example.ats.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -19,10 +20,13 @@ public class JobPost implements Serializable {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long jobpostid;
 
+        private String jobposttitle;
+
+        @CreationTimestamp
         private Date jobpostcreatedate;
+
         private String jobpostjobdesc;
         private String jobpostresponsibilities;
-        private String jobposteducation;
         private String jobpostbenefits;
         private String jobpostexperience;
         private String jobpostcategory;
@@ -30,7 +34,16 @@ public class JobPost implements Serializable {
         private boolean jobpostisactive;
         private boolean jobisapplied;
         private boolean jobisshortlisted;
-        private int jobpostduration;
+        private String jobpostcompanyname;
+        private String jobpostwebaddress;
+        private String jobpostcompanyprofile;
+
+        
+        private Date jobpostdeadline;
+        private String jobpostlocation;
+        private String jobposttype;
+
+        //private int jobpostduration;
 
 
         @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -44,20 +57,20 @@ public class JobPost implements Serializable {
         @OneToMany(mappedBy = "jobPost", cascade = CascadeType.ALL)
         private Set<JobLocation> jobLocations = new HashSet<>();
 
+        public String getJobposttitle() {
+                return jobposttitle;
+        }
+
+        public void setJobposttitle(String jobposttitle) {
+                this.jobposttitle = jobposttitle;
+        }
+
         public String getJobpostresponsibilities() {
                 return jobpostresponsibilities;
         }
 
         public void setJobpostresponsibilities(String jobpostresponsibilities) {
                 this.jobpostresponsibilities = jobpostresponsibilities;
-        }
-
-        public String getJobposteducation() {
-                return jobposteducation;
-        }
-
-        public void setJobposteducation(String jobposteducation) {
-                this.jobposteducation = jobposteducation;
         }
 
         public String getJobpostbenefits() {
@@ -117,13 +130,13 @@ public class JobPost implements Serializable {
                 this.jobpostisactive = jobpostisactive;
         }
 
-        public int getJobpostduration() {
-                return jobpostduration;
-        }
-
-        public void setJobpostduration(int jobpostduration) {
-                this.jobpostduration = jobpostduration;
-        }
+//        public int getJobpostduration() {
+//                return jobpostduration;
+//        }
+//
+//        public void setJobpostduration(int jobpostduration) {
+//                this.jobpostduration = jobpostduration;
+//        }
 
         public RecruiterUser getRecruiterUser() {
                 return recruiterUser;
@@ -171,5 +184,53 @@ public class JobPost implements Serializable {
 
         public void setJobpostcategory(String jobpostcategory) {
                 this.jobpostcategory = jobpostcategory;
+        }
+
+        public String getJobpostcompanyname() {
+                return jobpostcompanyname;
+        }
+
+        public void setJobpostcompanyname(String jobpostcompanyname) {
+                this.jobpostcompanyname = jobpostcompanyname;
+        }
+
+        public String getJobpostwebaddress() {
+                return jobpostwebaddress;
+        }
+
+        public void setJobpostwebaddress(String jobpostwebaddress) {
+                this.jobpostwebaddress = jobpostwebaddress;
+        }
+
+        public String getJobpostcompanyprofile() {
+                return jobpostcompanyprofile;
+        }
+
+        public void setJobpostcompanyprofile(String jobpostcompanyprofile) {
+                this.jobpostcompanyprofile = jobpostcompanyprofile;
+        }
+
+        public Date getJobpostdeadline() {
+                return jobpostdeadline;
+        }
+
+        public void setJobpostdeadline(Date jobpostdeadline) {
+                this.jobpostdeadline = jobpostdeadline;
+        }
+
+        public String getJobpostlocation() {
+                return jobpostlocation;
+        }
+
+        public void setJobpostlocation(String jobpostlocation) {
+                this.jobpostlocation = jobpostlocation;
+        }
+
+        public String getJobposttype() {
+                return jobposttype;
+        }
+
+        public void setJobposttype(String jobposttype) {
+                this.jobposttype = jobposttype;
         }
 }

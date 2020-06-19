@@ -48,14 +48,14 @@ public class RecruiterUserController {
                 .orElseThrow(() -> new ResourceNotFoundException("Note", "id", recid));
     }
 
-    @GetMapping("/{username")
+    @GetMapping("/{username}")
     public RecruiterUser getRecruiterByUserName(@PathVariable(value = "username") String username) throws NotFoundException {
         return recruiterRepository.findUsersByRecruiterUsername(username);
     }
 
     @GetMapping("/getId/{username}")
     public Long getRecruiterUserId(@PathVariable(value = "username") String username) throws NotFoundException {
-        return recruiterRepository.findUserIdByRecruiterUsername(   username);
+        return recruiterRepository.findUserIdByRecruiterUsername(username);
     }
 
     @PostMapping
