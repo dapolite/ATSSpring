@@ -31,6 +31,12 @@ public class JobPostController {
         return jobPostRepository.findAll();
     }
 
+    @GetMapping("/{jobid}")
+    public JobPost getJobPostById(@PathVariable(value = "jobid") Long jobid) {
+        return jobPostRepository.findById(jobid)
+                .orElseThrow(() -> new ResourceNotFoundException("Job", "id", jobid));
+    }
+
     @PostMapping("/{recid}")
     public JobPost createPost(@PathVariable (value = "recid") Long recid, @Valid @RequestBody JobPost jobPost) throws Exception{
         return recruiterUserRepository.findById(recid).map(user -> {

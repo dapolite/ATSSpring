@@ -6,6 +6,8 @@ import com.example.ats.repository.CandidateUserRepository;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.lang.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -27,7 +29,7 @@ public class CandidateResumeController
     }
 
     @PostMapping("/{candid}")
-    public CandidateResume createResume(@PathVariable (value = "candid") Long candid, @Valid @RequestBody CandidateResume candidateResume) throws Exception{
+    public CandidateResume createResume(@RequestParam("file") MultipartFile file, @PathVariable (value = "candid") Long candid, @Valid @RequestBody CandidateResume candidateResume) throws Exception{
         return candidateUserRepository.findById(candid).map(user -> {
             candidateResume.setCandidateUser(user);
             return candidateResumeRepository.save(candidateResume);

@@ -11,9 +11,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.HashMap;
@@ -32,13 +35,23 @@ public class CandidateUserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/homecan")
+    @GetMapping("/CandiddateLogin")
     public String printWelcome(ModelMap model, Principal principal ){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); //get logged in username
 
         model.addAttribute("username", name);
         return "Hello9";
+    }
+
+    @GetMapping("/logout")
+    public String fetchSignoutSite(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+
+        return "redirect:/login?logout";
     }
 
 //    @GetMapping("/candidatelist")
@@ -64,10 +77,10 @@ public class CandidateUserController {
     }*/
 
 
-    @GetMapping("/candidate/{canid}")
-    public void getCandidateById(@PathVariable(value = "id") Long canId) {
-        candidateRepository.findById(canId)
-                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", canId));
+    @GetMapping("/candidate/{id}")
+    public CandidateUser getCandidateById(@PathVariable(value = "id") Long id) {
+        return candidateRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Note", "id", id));
     }
 
     @GetMapping("/{username}")
@@ -88,19 +101,23 @@ public class CandidateUserController {
         candidateRepository.save(candidate);
     }
 
-    @PutMapping("/candidate/{id}")
-    public void updateCandidate(
-            @PathVariable(value = "id") Long userId, @Valid @RequestBody CandidateUser candidaterdet)
+    @PutMapping("/updatecandidate/{id}")
+    public CandidateUser updateCandidate(
+            @PathVariable(value = "id") Long id, @Valid @RequestBody CandidateUser candidatedetails)
             throws ResourceNotFoundException {
         CandidateUser candidate =
                 candidateRepository
-                        .findById(userId)
-                        .orElseThrow(() -> new ResourceNotFoundException("Users not found on :: " + userId));
-        candidate.setEmail(candidate.getEmail());
-        candidate.setPassword(candidate.getPassword());
-        candidate.setPhoneno(candidate.getPhoneno());
-        candidate.setAccountisactive(candidate.isAccountisactive());
-        candidateRepository.save(candidate);
+                        .findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Users not found on :: " + id));
+        candidate.setCandidate_about(candidatedetails.getCandidate_about());
+        candidate.setCandidate_address(candidatedetails.getCandidate_address());
+        candidate.setCandidate_fname(candidatedetails.getCandidate_fname());
+        candidate.setCandidate_lname(candidatedetails.getCandidate_lname());
+        candidate.setEmail(candidatedetails.getEmail());
+        candidate.setPassword(candidatedetails.getPassword());
+        candidate.setPhoneno(candidatedetails.getPhoneno());
+        CandidateUser updated=candidateRepository.save(candidate);
+        return updated;
     }
 
 

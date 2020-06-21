@@ -18,7 +18,7 @@ public class JobPost implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long jobpostid;
-
+        private String jobpostname;
         private Date jobpostcreatedate;
         private String jobpostjobdesc;
         private String jobpostresponsibilities;
@@ -171,5 +171,13 @@ public class JobPost implements Serializable {
 
         public void setJobpostcategory(String jobpostcategory) {
                 this.jobpostcategory = jobpostcategory;
+        }
+
+        public String getJobpostname() {
+                return jobpostname;
+        }
+
+        public void setJobpostname(String jobpostname) {
+                this.jobpostname = jobpostname;
         }
 }
