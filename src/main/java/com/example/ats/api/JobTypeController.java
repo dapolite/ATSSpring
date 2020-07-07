@@ -5,8 +5,11 @@ import com.example.ats.model.JobPost;
 import com.example.ats.model.JobType;
 import com.example.ats.repository.JobPostRepository;
 import com.example.ats.repository.JobTypeRepository;
+import com.example.ats.repository.RecruiterUserRepository;
+import org.apache.coyote.Response;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -22,6 +25,9 @@ public class JobTypeController {
     JobTypeRepository jobTypeRepository;
 
     @Autowired
+    RecruiterUserRepository recruiterUserRepository;
+
+    @Autowired
     JobPostRepository jobPostRepository;
 
     @PostMapping("/{jobId}")
@@ -29,6 +35,7 @@ public class JobTypeController {
         return jobPostRepository.findById(jobId).map(jobPost -> {
             jobType.setJobPost(jobPost);
             return jobTypeRepository.save(jobType);
+
         }).orElseThrow(() -> new ResourceNotFoundException("PostId " + jobId + " not found"));
     }
 

@@ -1,5 +1,7 @@
 package com.example.ats.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import org.springframework.data.annotation.CreatedDate;
@@ -15,6 +17,7 @@ public class CandidateResume implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long resumeId;
 
+    @JsonFormat(pattern = "dd-MM-yyyy", timezone = "India/Delhi")
     private Date candidate_dob;
     private String candidate_fullname;
     private String candidate_info;
@@ -26,10 +29,10 @@ public class CandidateResume implements Serializable
     private String candidate_sex;
     private String candidate_resume;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
-    @PrimaryKeyJoinColumn(name = "id")
-    @JsonIgnore
-    @MapsId
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name ="candidate_id")
+    //@JsonIgnore
+    @JsonBackReference
     private CandidateUser candidateUser;
 
     public Long getResumeId() {

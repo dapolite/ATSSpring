@@ -1,5 +1,6 @@
 package com.example.ats.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -19,9 +20,10 @@ public class Education implements Serializable
     private Long cgpa;
     private Long yearOfPassing;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
-    @PrimaryKeyJoinColumn(name = "id")
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "candidate_id")
+    //@JsonIgnore
+    @JsonBackReference
     private CandidateUser candidateUser;
 
     public Long getEducationId() {

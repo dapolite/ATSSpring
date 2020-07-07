@@ -105,7 +105,6 @@
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-search-orm -->
 
 
-
 		<dependency>
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>

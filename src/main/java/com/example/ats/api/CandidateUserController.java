@@ -3,7 +3,9 @@ package com.example.ats.api;
 //import com.example.ats.model.Candidate;
 import com.example.ats.model.CandidateUser;
 //import com.example.ats.repository.CandidateRepository;
+import com.example.ats.model.JobPost;
 import com.example.ats.repository.CandidateUserRepository;
+import com.example.ats.repository.JobPostRepository;
 import javassist.NotFoundException;
 import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +27,20 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins ="http://localhost:3000")
-@RequestMapping("/api/candidates")
+@RequestMapping("/api/Candidate")
 public class CandidateUserController {
 
     @Autowired
     private CandidateUserRepository candidateRepository;
 
     @Autowired
+    private JobPostRepository jobPostRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/CandiddateLogin")
+    @GetMapping("/CandidateLogin")
     public String printWelcome(ModelMap model, Principal principal ){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); //get logged in username
@@ -61,7 +66,7 @@ public class CandidateUserController {
 
     @GetMapping("/candidatelist")
     public List<CandidateUser> getAllCandidates(){
-        return candidateRepository.getData();
+        return candidateRepository.findAll();
     }
 
 /*    @GetMapping("/searchcandidate")
@@ -77,7 +82,7 @@ public class CandidateUserController {
     }*/
 
 
-    @GetMapping("/candidate/{id}")
+    @GetMapping("/get/{id}")
     public CandidateUser getCandidateById(@PathVariable(value = "id") Long id) {
         return candidateRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Note", "id", id));
@@ -101,7 +106,8 @@ public class CandidateUserController {
         candidateRepository.save(candidate);
     }
 
-    @PutMapping("/updatecandidate/{id}")
+
+    @PutMapping("/{id}/update")
     public CandidateUser updateCandidate(
             @PathVariable(value = "id") Long id, @Valid @RequestBody CandidateUser candidatedetails)
             throws ResourceNotFoundException {
@@ -121,7 +127,7 @@ public class CandidateUserController {
     }
 
 
-    @DeleteMapping("/candidate/{id}")
+    @DeleteMapping("/{id}/delete")
     public Map<String, Boolean> deleteCandidate(@PathVariable(value = "id") Long candidateId) throws Exception {
         CandidateUser candidate =
                 candidateRepository

@@ -1,5 +1,7 @@
 package com.example.ats.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,7 +14,9 @@ public class Experience implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long experienceId;
 
+    @JsonFormat(pattern = "dd-MM-yyyy", timezone = "India/Delhi")
     private Date startDate;
+    @JsonFormat(pattern = "dd-MM-yyyy", timezone = "India/Delhi")
     private Date endDate;
     private String jobTitle;
     private String experienceCompanyname;
@@ -22,9 +26,10 @@ public class Experience implements Serializable
     private String experienceJoblocationcountry;
     private String experienceJobdesc;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
-    @PrimaryKeyJoinColumn(name = "id")
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "candidate_id")
+    //@JsonIgnore
+    @JsonBackReference
     private CandidateUser candidateUser;
 
     public Long getExperienceId() {

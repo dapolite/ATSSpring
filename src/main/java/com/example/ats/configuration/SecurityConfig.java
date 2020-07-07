@@ -80,7 +80,7 @@ class CandidateSecurityConfig extends WebSecurityConfigurerAdapter {
         http       //other configure params.
                 .csrf().disable();
         http.cors();
-        http.requestMatchers().antMatchers("/api/candidates/homecan")
+        http.requestMatchers().antMatchers("/api/Candidate/CandidateLogin")
         .and()
         .authorizeRequests()
         .anyRequest().authenticated()

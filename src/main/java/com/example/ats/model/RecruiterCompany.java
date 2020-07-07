@@ -1,5 +1,6 @@
 package com.example.ats.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import javax.persistence.*;
@@ -21,9 +22,9 @@ public class RecruiterCompany implements Serializable {
     private Date companyestdate;
     private Byte companypic;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "id")
-    @JsonIgnore
+    @JsonBackReference
     private RecruiterUser recruiterUser;
 
     public Long getCompanyId() {

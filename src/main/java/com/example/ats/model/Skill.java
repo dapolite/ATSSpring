@@ -1,6 +1,7 @@
 package com.example.ats.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -18,15 +19,16 @@ public class Skill implements Serializable {
 
     @Id
     //@org.springframework.data.annotation.Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long skillId;
 
     //@Field(type = FieldType.Text)
     private String skillName;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "id",nullable = false)
-    @JsonIgnore
+    @JoinColumn(name = "candidate_id",nullable = false)
+    //@JsonIgnore
+    @JsonBackReference
     private CandidateUser candidateUser;
 
     public String getSkillName() {

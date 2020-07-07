@@ -1,5 +1,6 @@
 package com.example.ats.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
@@ -30,10 +31,12 @@ public class RecruiterUser implements Serializable {
     @CreationTimestamp
     private Date registerdate;
 
-    @OneToMany(mappedBy = "recruiterUser", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "recruiterUser", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<JobPost> jobpost=new HashSet<>();
 
-    @OneToMany(mappedBy = "recruiterUser", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "recruiterUser", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<RecruiterCompany> recruiterCompanies = new HashSet<>();
 
 /*    @OneToOne(mappedBy = "recruiterUser", cascade = CascadeType.ALL)

@@ -4,6 +4,7 @@ import com.example.ats.model.CandidateResume;
 import com.example.ats.model.JobPost;
 import com.example.ats.model.RecruiterUser;
 import com.example.ats.model.Skill;
+import com.example.ats.repository.CandidateUserRepository;
 import com.example.ats.repository.JobPostRepository;
 import com.example.ats.repository.RecruiterUserRepository;
 import org.elasticsearch.ResourceNotFoundException;
@@ -24,11 +25,24 @@ public class JobPostController {
     JobPostRepository jobPostRepository;
 
     @Autowired
+    CandidateUserRepository candidateUserRepository;
+
+    @Autowired
     RecruiterUserRepository recruiterUserRepository;
 
     @GetMapping
     public List<JobPost> getAllPost(){
         return jobPostRepository.findAll();
+    }
+
+    @GetMapping("/find")
+    public List<JobPost> getByType(@RequestParam("jobtypename") String jobtypename,String jobcity,String jobstate,String jobcountry){
+        return jobPostRepository.findByjobtypename(jobtypename,jobcity,jobstate,jobcountry);
+    }
+
+    @GetMapping("/search")
+    public List<JobPost> SearchJobName(@RequestParam("search") String search){
+        return jobPostRepository.SearchJob(search);
     }
 
     @GetMapping("/{jobid}")
@@ -53,9 +67,14 @@ public class JobPostController {
                 jobPostRepository
                         .findById(jobId)
                         .orElseThrow(() -> new ResourceNotFoundException("JobPost not found on :: " + jobId));
-        job.setJobLocations(job.getJobLocations());
-        job.setJobpostduration(job.getJobpostduration());
-        job.setJobpostjobdesc(job.getJobpostjobdesc());
+        job.setJobLocations(jobPost.getJobLocations());
+        job.setJobpostdeadline(jobPost.getJobpostdeadline());
+        job.setJobpostjobdesc(jobPost.getJobpostjobdesc());
+        job.setJobpostbenefits(jobPost.getJobpostbenefits());
+        job.setJobpostcategory(jobPost.getJobpostcategory());
+        job.setJobpostexperience(jobPost.getJobpostexperience());
+        job.setJobpostqualification(jobPost.getJobpostqualification());
+        job.setJobpostresponsibilities(jobPost.getJobpostresponsibilities());
         jobPostRepository.save(jobPost);
     }
 

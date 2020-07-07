@@ -1,7 +1,9 @@
 package com.example.ats.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -48,18 +50,22 @@ public class CandidateUser implements Serializable {
     private String candidateloc_state;
     private String candidateloc_country;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @CreationTimestamp
     private Date registerdate;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Skill> skills=new HashSet<>();
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CandidateResume> candidateResumes;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Education> educations;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "candidateUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Experience> experiences;
 

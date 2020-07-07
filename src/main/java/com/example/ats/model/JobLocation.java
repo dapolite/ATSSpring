@@ -1,6 +1,8 @@
 package com.example.ats.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,8 +21,9 @@ public class JobLocation implements Serializable {
     private String joblocationcountry;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn(name = "id")
-    @JsonIgnore
+    @JoinColumn(name = "jobPostId",nullable = false)
+    //@JsonIgnore
+    @JsonBackReference
     private JobPost jobPost;
 
     public Long getJoblocationId() {
